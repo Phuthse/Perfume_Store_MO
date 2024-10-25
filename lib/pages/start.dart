@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/login.dart';
-import 'package:perfume_store_mo/widget/widget_support.dart';
 
 class Start extends StatefulWidget {
   const Start({super.key});
@@ -13,17 +12,59 @@ class _StartState extends State<Start> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.only(top: 750,),
-          decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(15)),
-          padding: const EdgeInsets.only(top: 15,bottom: 15,left: 120,right: 120),
-          child: GestureDetector(
-            onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const LogIn()));
-                        },
-            child: Text("Get Started", style: AppWidget.whiteText(),)),
-        ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Container(
+            // Add background image
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/start.png'), // Your image path
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height *
+                      0.75), // Responsive margin
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        const Color.fromARGB(255, 62, 62, 62).withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 5), // changes position of shadow
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.symmetric(
+                  vertical: 5, horizontal: 100), // Symmetrical padding
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const LogIn()));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                child: Text(
+                  "Get Started",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -4,7 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:perfume_store_mo/pages/bestseller.dart';
 import 'package:perfume_store_mo/pages/details.dart';
 import 'package:perfume_store_mo/pages/justarrived.dart';
-import 'package:perfume_store_mo/pages/login.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -21,12 +20,13 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         actions: [
-          IconButton(onPressed:() async{
-            await GoogleSignIn().signOut();
-            FirebaseAuth.instance.signOut();
-            //Navigator.pushNamed(context, "/LogIn");
-            //Navigator.pop(context);
-          }, icon: Icon(Icons.logout))
+          IconButton(
+              onPressed: () async {
+                await GoogleSignIn().signOut();
+                FirebaseAuth.instance.signOut();
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.logout)),
         ],
       ),
       backgroundColor: Colors.white,
@@ -217,8 +217,11 @@ class _HomeState extends State<Home> {
                                 "50ml",
                                 style: AppWidget.lightText(),
                               ),
-                              Image.asset("images/lancome_idole_eau_de_parfum_nectar_.png",
-                                  height: 170, width: 170, fit: BoxFit.cover),
+                              Image.asset(
+                                  "images/lancome_idole_eau_de_parfum_nectar_.png",
+                                  height: 170,
+                                  width: 170,
+                                  fit: BoxFit.cover),
                               const SizedBox(height: 10.0),
                               Text(
                                 "\$225",
@@ -246,8 +249,11 @@ class _HomeState extends State<Home> {
                                 "50ml",
                                 style: AppWidget.lightText(),
                               ),
-                              Image.asset("images/CHRISTIAN-DIOR-Happy-Hour.png",
-                                  height: 170, width: 170, fit: BoxFit.cover),
+                              Image.asset(
+                                  "images/CHRISTIAN-DIOR-Happy-Hour.png",
+                                  height: 170,
+                                  width: 170,
+                                  fit: BoxFit.cover),
                               const SizedBox(height: 10.0),
                               Text(
                                 "\$249",

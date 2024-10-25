@@ -5,7 +5,6 @@ import 'package:perfume_store_mo/pages/cart.dart';
 import 'package:perfume_store_mo/pages/home.dart';
 import 'package:perfume_store_mo/pages/profile.dart';
 
-
 class Bottomnav extends StatefulWidget {
   const Bottomnav({super.key});
 
@@ -18,48 +17,53 @@ class _BottomnavState extends State<Bottomnav> {
 
   late List<Widget> pages;
   late Widget currentPage;
-  late Home homepage;
+  late Home home;
   late Activity activity;
   late Cart cart;
   late Profile profile;
 
-@override
+  @override
   void initState() {
-    homepage = const Home();
+    home = const Home();
     activity = const Activity();
     cart = const Cart();
     profile = const Profile();
-    pages = [homepage, activity, cart, profile];
+    pages = [home, activity, cart, profile];
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-        height: 65,
-        backgroundColor: Colors.white,
-        color: const Color.fromARGB(255, 238, 235, 235),
-        animationDuration: const Duration(milliseconds: 300),
-        onTap: (int index){
-          setState(() {
-            currentTabIndex = index;
-          });
-        },
-        items: const [
-        Icon(
-          Icons.home, color: Colors.black,
-        ),
-        Icon(
-          Icons.message, color: Colors.black,
-        ),
-        Icon(
-          Icons.shopping_cart, color: Colors.black,
-        ),
-        Icon(
-          Icons.manage_accounts, color: Colors.black,
-        )
-      ]),
-      body: pages[currentTabIndex] ,
+          height: 55,
+          backgroundColor: Colors.white,
+          color: const Color.fromARGB(255, 238, 235, 235),
+          animationDuration: const Duration(milliseconds: 300),
+          onTap: (int index) {
+            setState(() {
+              currentTabIndex = index;
+            });
+          },
+          items: const [
+            Icon(
+              Icons.home,
+              color: Colors.black,
+            ),
+            Icon(
+              Icons.message,
+              color: Colors.black,
+            ),
+            Icon(
+              Icons.shopping_cart,
+              color: Colors.black,
+            ),
+            Icon(
+              Icons.manage_accounts,
+              color: Colors.black,
+            )
+          ]),
+      body: pages[currentTabIndex],
     );
   }
 }

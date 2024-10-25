@@ -33,7 +33,6 @@ class _RegisterState extends State<Register> {
 
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Bottomnav()));
-
       } on FirebaseException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -47,14 +46,13 @@ class _RegisterState extends State<Register> {
             "Account already exist",
             style: TextStyle(fontSize: 18.0),
           )));
-        }else if (e.code == 'invalid-email') {
+        } else if (e.code == 'invalid-email') {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
             "Email address is wrong formatted",
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           )));
         }
-
       }
     }
   }

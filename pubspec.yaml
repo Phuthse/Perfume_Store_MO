@@ -76,6 +76,7 @@ flutter:
   - images/lancome_idole_eau_de_parfum_nectar_.png
   - images/CHRISTIAN-DIOR-Happy-Hour.png
   - images/user.png
+  - images/start.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
