@@ -77,6 +77,8 @@ flutter:
   - images/CHRISTIAN-DIOR-Happy-Hour.png
   - images/user.png
   - images/start.png
+  - images/avt1.jfif
+  - images/bgpf.jfif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

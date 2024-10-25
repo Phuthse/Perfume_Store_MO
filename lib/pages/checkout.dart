@@ -399,7 +399,7 @@ class _CheckoutState extends State<Checkout> {
               Container(
                 margin: EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: const Color.fromARGB(255, 242, 240, 240),
                     borderRadius: BorderRadius.circular(10)),
                 padding: EdgeInsets.all(10),
                 child: Row(

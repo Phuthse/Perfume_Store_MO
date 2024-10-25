@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:perfume_store_mo/pages/bestseller.dart';
 import 'package:perfume_store_mo/pages/details.dart';
 import 'package:perfume_store_mo/pages/justarrived.dart';
+import 'package:perfume_store_mo/pages/navbarmenu.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -17,46 +18,32 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Navbarmenu(),
       appBar: AppBar(
+        actionsIconTheme: IconThemeData(color: Colors.blueGrey),
         backgroundColor: Colors.white,
         actions: [
-          IconButton(
-              onPressed: () async {
-                await GoogleSignIn().signOut();
-                FirebaseAuth.instance.signOut();
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.logout)),
+          Icon(Icons.search, color: Colors.black,)
         ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () async {
+        //         await GoogleSignIn().signOut();
+        //         FirebaseAuth.instance.signOut();
+        //         Navigator.pop(context);
+        //       },
+        //       icon: const Icon(Icons.logout)),
+        // ],
       ),
       backgroundColor: Colors.white,
       body: Container(
-        margin: const EdgeInsets.only(top: 2.0, left: 10.0, right: 10.0),
+        margin: const EdgeInsets.only(top: 0.0, left: 10.0, right: 10.0),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(4.0),
-                    child: const Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(4.0),
-                    child: const Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 25.0),
+              const SizedBox(height: 5.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

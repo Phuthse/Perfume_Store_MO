@@ -16,7 +16,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
@@ -63,7 +63,8 @@ class _CartState extends State<Cart> {
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: Color.fromARGB(95, 233, 157, 201), width: 3))),
+                            color: Color.fromARGB(95, 233, 157, 201),
+                            width: 3))),
                 child: Row(
                   children: [
                     Container(
@@ -149,7 +150,8 @@ class _CartState extends State<Cart> {
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: Color.fromARGB(95, 233, 157, 201), width: 3))),
+                            color: Color.fromARGB(95, 233, 157, 201),
+                            width: 3))),
                 child: Row(
                   children: [
                     Container(
@@ -232,18 +234,28 @@ class _CartState extends State<Cart> {
               ),
               const SizedBox(height: 365.0),
               Container(
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                margin: EdgeInsets.only(left: 10, right: 10,),
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 242, 240, 240),
+                    borderRadius: BorderRadius.circular(10)),
+                margin: const EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                ),
                 padding: EdgeInsets.all(10),
-           
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      child: Text(
-                        "Total:" + "\$229.00",
-                        style: TextStyle(fontSize: 23),
-                      ),
+                    const Text(
+                      "Total: ",
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+                    ),
+                    const Text(
+                      "\$679.00",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -253,10 +265,13 @@ class _CartState extends State<Cart> {
                                 builder: (context) => const Checkout()));
                       },
                       child: Container(
-                        decoration: BoxDecoration(color: Color.fromARGB(95, 233, 157, 201), borderRadius: BorderRadius.circular(15) ),
-                        padding: EdgeInsets.only(top: 23, bottom: 23, left: 25, right: 25),
+                        decoration: BoxDecoration(
+                            color: Color.fromARGB(95, 233, 157, 201),
+                            borderRadius: BorderRadius.circular(15)),
+                        padding: EdgeInsets.only(
+                            top: 23, bottom: 23, left: 25, right: 25),
                         child: Text(
-                          "Check Out (1)",
+                          "Check Out (3)",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),

@@ -27,21 +27,22 @@ class _LogInState extends State<LogIn> {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Bottomnav()));
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      if (e.code == 'invalid-email') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-          "No User Found for that Email",
-          style: TextStyle(fontSize: 18.0, color: Colors.black),
+          "Email address is wrong formatted",
+          style: TextStyle(fontSize: 18.0, color: Colors.white),
         )));
-      } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-          "Wrong Password Provided by User",
-          style: TextStyle(fontSize: 18.0, color: Colors.black),
+          "Wrong Email or Password, please try again",
+          style: TextStyle(fontSize: 18.0, color: Colors.white),
         )));
-      }
+      } 
     }
   }
 
@@ -61,12 +62,12 @@ class _LogInState extends State<LogIn> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/start.png'), // Your image path
-                fit: BoxFit.contain,
-              ),),
+          image: DecorationImage(
+            image: AssetImage('images/start.png'), // Your image path
+            fit: BoxFit.contain,
+          ),
+        ),
         child: SingleChildScrollView(
-          
           child: Container(
               //set background image for login here
               /*decoration: const BoxDecoration(
@@ -159,7 +160,10 @@ class _LogInState extends State<LogIn> {
                     const SizedBox(
                       height: 60.0,
                     ),
-                    Container(child: Text("OR", style: TextStyle(color: Colors.white, fontSize: 18)),),
+                    Container(
+                      child: Text("OR",
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ),
                     const SizedBox(
                       height: 30,
                     ),
@@ -187,7 +191,8 @@ class _LogInState extends State<LogIn> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const Register()));
+                                        builder: (context) =>
+                                            const Register()));
                               },
                               child: Container(
                                   child: Text(
