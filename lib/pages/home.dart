@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:perfume_store_mo/pages/bestseller.dart';
-import 'package:perfume_store_mo/pages/details.dart';
+import 'package:perfume_store_mo/pages/productdetails.dart';
 import 'package:perfume_store_mo/pages/justarrived.dart';
 import 'package:perfume_store_mo/pages/navbarmenu.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
@@ -23,17 +21,8 @@ class _HomeState extends State<Home> {
         actionsIconTheme: IconThemeData(color: Colors.blueGrey),
         backgroundColor: Colors.white,
         actions: [
-          Icon(Icons.search, color: Colors.black,)
+          IconButton(onPressed: (){}, icon: Icon(Icons.search)),
         ],
-        // actions: [
-        //   IconButton(
-        //       onPressed: () async {
-        //         await GoogleSignIn().signOut();
-        //         FirebaseAuth.instance.signOut();
-        //         Navigator.pop(context);
-        //       },
-        //       icon: const Icon(Icons.logout)),
-        // ],
       ),
       backgroundColor: Colors.white,
       body: Container(
@@ -62,7 +51,12 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 54, 52, 52),
-                          borderRadius: BorderRadius.circular(4)),
+                          borderRadius: BorderRadius.only(
+                            topLeft: new Radius.circular(5.0),
+                            topRight: new Radius.circular(15.0),
+                            bottomLeft: new Radius.circular(15.0),
+                            bottomRight: new Radius.circular(5.0),
+                          )),
                       child: Text(
                         "see all>",
                         style: AppWidget.whiteText(),
@@ -86,7 +80,7 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Details()));
+                                builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),
@@ -169,7 +163,12 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 54, 52, 52),
-                          borderRadius: BorderRadius.circular(4)),
+                          borderRadius: BorderRadius.only(
+                            topLeft: new Radius.circular(5.0),
+                            topRight: new Radius.circular(15.0),
+                            bottomLeft: new Radius.circular(15.0),
+                            bottomRight: new Radius.circular(5.0),)
+                            ),
                       child: Text(
                         "see all>",
                         style: AppWidget.whiteText(),

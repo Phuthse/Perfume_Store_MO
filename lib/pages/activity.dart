@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/activitydetails.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
-import 'package:perfume_store_mo/pages/details.dart';
+import 'package:perfume_store_mo/pages/productdetails.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
 class Activity extends StatefulWidget {
@@ -99,7 +99,7 @@ class _ActivityState extends State<Activity> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Details()));
+                                builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),
@@ -148,7 +148,7 @@ class _ActivityState extends State<Activity> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Details()));
+                                builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),
@@ -185,7 +185,7 @@ class _ActivityState extends State<Activity> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Details()));
+                                builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/cart.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
-class Details extends StatefulWidget {
-  const Details({super.key});
+class Productdetails extends StatefulWidget {
+  const Productdetails({super.key});
 
   @override
-  State<Details> createState() => _DetailsState();
+  State<Productdetails> createState() => _ProductdetailsState();
 }
 
-class _DetailsState extends State<Details> {
+class _ProductdetailsState extends State<Productdetails> {
   int q = 1; //minimum quantity
   @override
   Widget build(BuildContext context) {

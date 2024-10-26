@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perfume_store_mo/pages/details.dart';
+import 'package:perfume_store_mo/pages/productdetails.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
 class Bestseller extends StatefulWidget {
@@ -71,7 +71,7 @@ class _BestsellerState extends State<Bestseller> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Details()));
+                                builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),
