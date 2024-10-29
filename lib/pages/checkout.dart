@@ -22,7 +22,7 @@ class _CheckoutState extends State<Checkout> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 45, top: 65, left: 10),
+                margin: const EdgeInsets.only(right: 45, top: 65, left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -42,13 +42,13 @@ class _CheckoutState extends State<Checkout> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           border: Border(
                               bottom:
                                   BorderSide(color: Colors.black, width: 3))),
                       padding: const EdgeInsets.only(
                           left: 120, right: 130, bottom: 5),
-                      child: Text(
+                      child: const Text(
                         "Checkout",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
@@ -58,8 +58,8 @@ class _CheckoutState extends State<Checkout> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                decoration: const BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
                             color: Color.fromARGB(95, 233, 157, 201),
@@ -79,16 +79,16 @@ class _CheckoutState extends State<Checkout> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("BVLGARI Rose Goldea"),
-                          SizedBox(
+                          const Text("BVLGARI Rose Goldea"),
+                          const SizedBox(
                             height: 15,
                           ),
-                          Text("size: 50ml"),
-                          SizedBox(
+                          const Text("size: 50ml"),
+                          const SizedBox(
                             height: 5,
                           ),
                           Container(
-                            child: Row(
+                            child: const Row(
                               children: [
                                 Text(
                                   "\$229.00",
@@ -98,7 +98,7 @@ class _CheckoutState extends State<Checkout> {
                             ),
                           ),
                           Container(
-                            child: Text("Quantity: 2"),
+                            child: const Text("Quantity: 2"),
                           )
                         ],
                       ),
@@ -107,8 +107,8 @@ class _CheckoutState extends State<Checkout> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                decoration: const BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
                             color: Color.fromARGB(95, 233, 157, 201),
@@ -128,16 +128,16 @@ class _CheckoutState extends State<Checkout> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Lancome Idol Idole Nectar"),
-                          SizedBox(
+                          const Text("Lancome Idol Idole Nectar"),
+                          const SizedBox(
                             height: 15,
                           ),
-                          Text("size: 50ml"),
-                          SizedBox(
+                          const Text("size: 50ml"),
+                          const SizedBox(
                             height: 5,
                           ),
                           Container(
-                            child: Row(
+                            child: const Row(
                               children: [
                                 Text(
                                   "\$218.00",
@@ -147,7 +147,7 @@ class _CheckoutState extends State<Checkout> {
                             ),
                           ),
                           Container(
-                            child: Text("Quantity: 1"),
+                            child: const Text("Quantity: 1"),
                           )
                         ],
                       ),
@@ -155,14 +155,14 @@ class _CheckoutState extends State<Checkout> {
                   ],
                 ),
               ),
-              SizedBox(height: 115,),
+              const SizedBox(height: 115,),
               Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
                 padding:
-                    EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
+                    const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),border: Border(bottom: BorderSide(color: Colors.black, width: 1))),
+                    borderRadius: BorderRadius.circular(10),border: const Border(bottom: BorderSide(color: Colors.black, width: 1))),
                 child: Row(
                   children: [
                     Container(
@@ -173,43 +173,43 @@ class _CheckoutState extends State<Checkout> {
                             child: Row(
                               children: [
                                 Container(
-                                  child: Icon(Icons.local_shipping),
+                                  child: const Icon(Icons.local_shipping),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Shipping Option",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 147,
                                 ),
                                 
                               ],
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           Container(
                             child: Row(
                               children: [
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Standard Express",
                                     style: TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 210,
                                 ),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "\$3>",
                                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
@@ -218,7 +218,7 @@ class _CheckoutState extends State<Checkout> {
                             ),
                           ),
                           Container(
-                            child: Text(
+                            child: const Text(
                               "Guaranteed to get by 30/09 - 03/10",
                               style: TextStyle(
                                   fontWeight: FontWeight.w300, fontSize: 16),
@@ -232,16 +232,16 @@ class _CheckoutState extends State<Checkout> {
               ),
               Container(
 
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   left: 10,
                   right: 10,
                   
                 ),
                 padding:
-                    EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
+                    const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10), border: Border(bottom: BorderSide(color: Colors.black, width: 1))),
+                    borderRadius: BorderRadius.circular(10), border: const Border(bottom: BorderSide(color: Colors.black, width: 1))),
                 child: Row(
                   children: [
                     Container(
@@ -252,15 +252,15 @@ class _CheckoutState extends State<Checkout> {
                             child: Row(
                               children: [
                                 Container(
-                                  child: Icon(Icons.money),
+                                  child: const Icon(Icons.money),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
-                                Container(child: Text("Payment Option", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),),
-                                SizedBox(width: 47,),
+                                Container(child: const Text("Payment Option", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),),
+                                const SizedBox(width: 47,),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Cash on Delivery>",
                                     style: TextStyle(
                                         fontSize: 18,
@@ -279,16 +279,16 @@ class _CheckoutState extends State<Checkout> {
               ),
               Container(
 
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   left: 10,
                   right: 10,
                   top: 5,
                 ),
                 padding:
-                    EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                    const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10), border: Border(bottom: BorderSide(color: Colors.black, width: 1))),
+                    borderRadius: BorderRadius.circular(10), border: const Border(bottom: BorderSide(color: Colors.black, width: 1))),
                 child: Row(
                   children: [
                     Container(
@@ -299,13 +299,13 @@ class _CheckoutState extends State<Checkout> {
                             child: Row(
                               children: [
                                 Container(
-                                  child: Icon(Icons.money),
+                                  child: const Icon(Icons.money),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Payment Details",
                                     style: TextStyle(
                                         fontSize: 18,
@@ -315,22 +315,22 @@ class _CheckoutState extends State<Checkout> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           Container(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Merchandise Subtotal",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w300),
                                   ),
                                 ),
-                                SizedBox(width: 130,),
+                                const SizedBox(width: 130,),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "\$676.00",
                                     style: TextStyle(
                                         fontSize: 18,
@@ -345,16 +345,16 @@ class _CheckoutState extends State<Checkout> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Shipping Subtotal",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w300),
                                   ),
                                 ),
-                                SizedBox(width: 185,),
+                                const SizedBox(width: 185,),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "\$3.00",
                                     style: TextStyle(
                                         fontSize: 18,
@@ -369,16 +369,16 @@ class _CheckoutState extends State<Checkout> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Total Payment",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                SizedBox(width: 185,),
+                                const SizedBox(width: 185,),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "\$679.00",
                                     style: TextStyle(
                                         fontSize: 18,
@@ -397,27 +397,27 @@ class _CheckoutState extends State<Checkout> {
               ),
               const SizedBox(height: 5.0),
               Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
+                margin: const EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 242, 240, 240),
                     borderRadius: BorderRadius.circular(10)),
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   
                   children: [
                     Container(
-                      child: Text(
+                      child: const Text(
                         "Total: ",
                         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Container(
-                      child: Text(
+                      child: const Text(
                         "\$679.00",
                         style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: Colors.red),
                       ),
                     ),
-                    SizedBox(width: 80,),
+                    const SizedBox(width: 80,),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -427,11 +427,11 @@ class _CheckoutState extends State<Checkout> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(95, 233, 157, 201),
+                            color: const Color.fromARGB(95, 233, 157, 201),
                             borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             top: 23, bottom: 23, left: 25, right: 25),
-                        child: Text(
+                        child: const Text(
                           "Place Order",
                           style: TextStyle(fontSize: 18),
                         ),

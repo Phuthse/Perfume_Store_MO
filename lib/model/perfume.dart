@@ -69,9 +69,7 @@ class Perfume {
     middleNote = json['middleNote'];
     baseNote = json['baseNote'];
     dateAdded = json['dateAdded'];
-
-    }
-  
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -93,7 +91,7 @@ class Perfume {
     data['middleNote'] = this.middleNote;
     data['baseNote'] = this.baseNote;
     data['dateAdded'] = this.dateAdded;
- 
+
     return data;
   }
 }

@@ -44,6 +44,10 @@ dependencies:
   google_sign_in: ^6.2.1
   firebase_ui_oauth_google: ^1.4.0
   firebase_ui_auth: ^1.16.0
+  flutter_riverpod: any
+  firebase_storage: ^12.3.4
+  image_picker: ^1.1.2
+  random_string: ^2.3.1
 
 dev_dependencies:
 

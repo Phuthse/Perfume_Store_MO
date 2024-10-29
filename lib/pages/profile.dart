@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perfume_store_mo/model/user.dart';
+
 import 'package:perfume_store_mo/pages/bestseller.dart';
 import 'package:perfume_store_mo/pages/productdetails.dart';
 import 'package:perfume_store_mo/pages/justarrived.dart';
@@ -15,21 +15,20 @@ class Profile extends StatefulWidget {
 }
 
 class _ProState extends State<Profile> {
-  List<User> users = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: Navbarmenu(),
+        drawer: const Navbarmenu(),
         appBar: AppBar(
-          actionsIconTheme: IconThemeData(color: Colors.blueGrey),
+          actionsIconTheme: const IconThemeData(color: Colors.blueGrey),
           backgroundColor: Colors.white,
         ),
         body: Container(
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.all(15),
-                padding: EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.all(15),
+                padding: const EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -39,7 +38,7 @@ class _ProState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         GestureDetector(
@@ -50,14 +49,14 @@ class _ProState extends State<Profile> {
                                     builder: (context) => const Profiledetails()));
                           },
                           child: Container(
-                              margin: EdgeInsets.only(left: 350),
-                              child: Icon(Icons.edit_outlined)),
+                              margin: const EdgeInsets.only(left: 350),
+                              child: const Icon(Icons.edit_outlined)),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 20),
+                          margin: const EdgeInsets.only(left: 20),
                           child: Row(
                             children: [
                               CircleAvatar(
@@ -70,10 +69,10 @@ class _ProState extends State<Profile> {
                                     height: 100,
                                     fit: BoxFit.cover,
                                   ))),
-                              SizedBox(
+                              const SizedBox(
                                 width: 15,
                               ),
-                              Text(
+                              const Text(
                                 "Tran Hoang Phu (K17 HCM)",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w400),
@@ -81,20 +80,20 @@ class _ProState extends State<Profile> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Container(
-                            margin: EdgeInsets.only(left: 60),
-                            child: Icon(Icons.camera_alt)),
+                            margin: const EdgeInsets.only(left: 60),
+                            child: const Icon(Icons.camera_alt)),
                       ],
                     )
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -105,16 +104,14 @@ class _ProState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 255, 255),
+                          decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
                               border: Border(
                                   bottom: BorderSide(
                                       width: 2, color: Colors.black))),
-                          child: Row(
+                          child: const Row(
                             children: [
-                              Container(
-                                child: Icon(Icons.wysiwyg),
-                              ),
+                              Icon(Icons.wysiwyg),
                               Text(
                                 "My Purchase",
                                 style: TextStyle(
@@ -123,18 +120,16 @@ class _ProState extends State<Profile> {
                               SizedBox(
                                 width: 70,
                               ),
-                              Container(
-                                child: Text(
-                                  "View Purchase History>",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                              Text(
+                                "View Purchase History>",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 200,
                         ),
                       ],
