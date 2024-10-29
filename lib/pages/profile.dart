@@ -1,7 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:perfume_store_mo/model/user.dart';
+import 'dart:convert';
+
+import 'package:perfume_store_mo/pages/navbarmenu.dart';
+import 'package:perfume_store_mo/pages/profiledetails.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -11,48 +13,163 @@ class Profile extends StatefulWidget {
 }
 
 class _ProState extends State<Profile> {
-  List<User> users = [];
+  Map<String, dynamic> user = {};
+  bool isLoading = true;
+  String errorMessage = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'http://www.perfumestore.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          user = json.decode(response.body);
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          errorMessage = 'Failed to load user data: ${response.statusCode}';
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'An error occurred: $e';
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Test API"),
-      ),
-      body: ListView.builder(
-          itemCount: users.length,
-          itemBuilder: (context, index) {
-            final user = users[index];
-            final email = user.email;
-            final name = user.firstName;
-            final role = user.role;
-            return ListTile(
-              title: Text(name!),
-              subtitle: Text(email!),
-              
-            );
-          }),
-      floatingActionButton: FloatingActionButton(onPressed: fetchUsers),
-    );
-  }
-
-  void fetchUsers() async {
-    print("fetch users called");
-    const url = 'https://randomuser.me/api/?results=100';
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    final body = response.body;
-    final json = jsonDecode(body);
-    final results = json['results'] as List<dynamic>;
-    final Transformed = results.map((e){
-      return User(
-        firstName: e['firstName'],
-        email: e['email'],
-        phone: e['phone'],
-      );
-      }).toList();
-    setState(() {
-      users = Transformed;
-    });
-    print("fetch users complete");
+        drawer: Navbarmenu(),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          actionsIconTheme: const IconThemeData(color: Colors.blueGrey),
+        ),
+        body: isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : errorMessage.isNotEmpty
+                ? Center(child: Text(errorMessage))
+                : Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 10),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Profiledetails()));
+                                    },
+                                    child: Container(
+                                        margin:
+                                            const EdgeInsets.only(left: 350),
+                                        child: const Icon(Icons.edit_outlined)),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 20),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                            minRadius: 45,
+                                            maxRadius: 50,
+                                            child: ClipOval(
+                                                child: Image.asset(
+                                              "images/avt1.jfif",
+                                              width: 100,
+                                              height: 100,
+                                              fit: BoxFit.cover,
+                                            ))),
+                                        const SizedBox(width: 15),
+                                        Text(
+                                          user['firstName'] ?? "Unknown User",
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Container(
+                                      margin: const EdgeInsets.only(left: 60),
+                                      child: const Icon(Icons.camera_alt)),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 15, right: 15),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255),
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                width: 2,
+                                                color: Colors.black))),
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.wysiwyg),
+                                        const SizedBox(width: 10),
+                                        const Text(
+                                          "My Purchase",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w300),
+                                        ),
+                                        const SizedBox(width: 70),
+                                        const Text(
+                                          "View Purchase History >",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 200),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ));
   }
 }
