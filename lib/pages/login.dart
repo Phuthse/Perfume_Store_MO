@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
 import 'package:perfume_store_mo/pages/forgotpas.dart';
-import 'package:perfume_store_mo/pages/home.dart';
 import 'package:perfume_store_mo/pages/register.dart';
 import 'package:perfume_store_mo/pages/start.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
@@ -63,19 +62,12 @@ class _LogInState extends State<LogIn> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/start.png'), // Your image path
+            image: AssetImage('images/start.png'),
             fit: BoxFit.contain,
           ),
         ),
         child: SingleChildScrollView(
           child: Container(
-              //set background image for login here
-              /*decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("images/lg.png"),
-                fit: BoxFit.cover,
-              ),
-            ),*/
               alignment: Alignment.center,
               padding: const EdgeInsets.all(32),
               child: Form(
@@ -153,7 +145,7 @@ class _LogInState extends State<LogIn> {
                                 bottom:
                                     BorderSide(color: Colors.black, width: 1))),
                         padding: const EdgeInsets.only(
-                            left: 159, right: 159, top: 15, bottom: 15),
+                            left: 140, right: 140, top: 15, bottom: 15),
                         child: Text("Login", style: AppWidget.whiteText()),
                       ),
                     ),

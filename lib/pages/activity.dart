@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/activitydetails.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
-import 'package:perfume_store_mo/pages/details.dart';
+import 'package:perfume_store_mo/pages/productdetails.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
 class Activity extends StatefulWidget {
@@ -15,7 +15,7 @@ class _ActivityState extends State<Activity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: Container(
         margin: const EdgeInsets.only(top: 65.0, left: 10.0, right: 10.0),
         child: SingleChildScrollView(
@@ -96,10 +96,10 @@ class _ActivityState extends State<Activity> {
                     const SizedBox(width: 5.0),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Details()));
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),
@@ -145,10 +145,10 @@ class _ActivityState extends State<Activity> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Details()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),
@@ -182,10 +182,10 @@ class _ActivityState extends State<Activity> {
                     const SizedBox(width: 5.0),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Details()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => const Productdetails()));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(5.0),

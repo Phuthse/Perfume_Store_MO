@@ -1,10 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:perfume_store_mo/model/perfume.dart';
+import 'package:perfume_store_mo/network/network_perfume_request.dart';
 import 'package:perfume_store_mo/pages/bestseller.dart';
-import 'package:perfume_store_mo/pages/details.dart';
+import 'package:perfume_store_mo/pages/productdetails.dart';
 import 'package:perfume_store_mo/pages/justarrived.dart';
 import 'package:perfume_store_mo/pages/navbarmenu.dart';
+import 'package:perfume_store_mo/pages/search.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -15,27 +16,30 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Perfume> perfumeData = <Perfume>[];
+
+  @override
+  void initState() {
+    super.initState();
+    NetworkPerfumeRequest.fetchPerfumes().then((dataFromSever) {
+      setState(() {
+        perfumeData = dataFromSever;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Navbarmenu(),
       appBar: AppBar(
         actionsIconTheme: IconThemeData(color: Colors.blueGrey),
-        backgroundColor: Colors.white,
         actions: [
-          Icon(Icons.search, color: Colors.black,)
+          IconButton(onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
+          }, icon: Icon(Icons.search)),
         ],
-        // actions: [
-        //   IconButton(
-        //       onPressed: () async {
-        //         await GoogleSignIn().signOut();
-        //         FirebaseAuth.instance.signOut();
-        //         Navigator.pop(context);
-        //       },
-        //       icon: const Icon(Icons.logout)),
-        // ],
       ),
-      backgroundColor: Colors.white,
       body: Container(
         margin: const EdgeInsets.only(top: 0.0, left: 10.0, right: 10.0),
         child: SingleChildScrollView(
@@ -62,7 +66,12 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 54, 52, 52),
-                          borderRadius: BorderRadius.circular(4)),
+                          borderRadius: BorderRadius.only(
+                            topLeft: new Radius.circular(5.0),
+                            topRight: new Radius.circular(15.0),
+                            bottomLeft: new Radius.circular(15.0),
+                            bottomRight: new Radius.circular(5.0),
+                          )),
                       child: Text(
                         "see all>",
                         style: AppWidget.whiteText(),
@@ -76,78 +85,61 @@ class _HomeState extends State<Home> {
                 style: AppWidget.lightText(),
               ),
               const SizedBox(height: 25.0),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
+              Container(
+                padding: const EdgeInsets.only(
+                    top: 15, bottom: 5, right: 5),
+                height: 300,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: perfumeData.length,
+                  itemBuilder: (context, index) {
+                    final product = perfumeData[index];
+
+                    return GestureDetector(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Details()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Productdetails(product: product),
+                          ),
+                        );
                       },
                       child: Container(
-                        margin: const EdgeInsets.all(5.0),
-                        child: Material(
-                          elevation: 10.0,
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(10.0),
+                        width: 199,
+                        margin: EdgeInsets.only(right: 5),
+                        child: Card(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text("BVLGARI Rose Goldea"),
-                                const SizedBox(height: 5.0),
-                                Text(
-                                  "50ml",
-                                  style: AppWidget.lightText(),
+                                Text('${perfumeData[index].name}'),
+                                SizedBox(
+                                  height: 5,
                                 ),
-                                Image.asset("images/BVLGARI-Rose-Goldea.jpg",
-                                    height: 170, width: 170, fit: BoxFit.cover),
-                                const SizedBox(height: 10.0),
+                                Image.network('${perfumeData[index].imageUrl}'),
+                                SizedBox(
+                                  height: 5,
+                                ),
                                 Text(
-                                  "\$225",
-                                  style: AppWidget.lightText(),
+                                  '${perfumeData[index].volume}' + " ml",
+                                ),
+                                Text(
+                                  "\$" + '${perfumeData[index].price}',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 5.0),
-                    Container(
-                      margin: const EdgeInsets.all(5.0),
-                      child: Material(
-                        elevation: 10.0,
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text("Chopard Happy Bigaradia"),
-                              const SizedBox(height: 5.0),
-                              Text(
-                                "50ml",
-                                style: AppWidget.lightText(),
-                              ),
-                              Image.asset("images/Chopard-Happy-Bigaradia.jpg",
-                                  height: 170, width: 170, fit: BoxFit.cover),
-                              const SizedBox(height: 10.0),
-                              Text(
-                                "\$249",
-                                style: AppWidget.lightText(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 5.0),
-                  ],
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 25.0),
@@ -169,7 +161,12 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 54, 52, 52),
-                          borderRadius: BorderRadius.circular(4)),
+                          borderRadius: BorderRadius.only(
+                            topLeft: new Radius.circular(5.0),
+                            topRight: new Radius.circular(15.0),
+                            bottomLeft: new Radius.circular(15.0),
+                            bottomRight: new Radius.circular(5.0),
+                          )),
                       child: Text(
                         "see all>",
                         style: AppWidget.whiteText(),
@@ -183,75 +180,60 @@ class _HomeState extends State<Home> {
                 style: AppWidget.lightText(),
               ),
               const SizedBox(height: 25.0),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(5.0),
-                      child: Material(
-                        elevation: 10.0,
-                        borderRadius: BorderRadius.circular(20.0),
+              Container(
+                padding: EdgeInsets.all(5),
+                height: 300,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: perfumeData.length,
+                  itemBuilder: (context, index) {
+                    final product = perfumeData[index];
+
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  Productdetails(product: product),
+                            ),
+                          );
+                        },
                         child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text("Lancome Idol Idole Nectar"),
-                              const SizedBox(height: 5.0),
-                              Text(
-                                "50ml",
-                                style: AppWidget.lightText(),
+                          width: 200,
+                          margin: EdgeInsets.only(
+                              right: 5), // Khoảng cách giữa các item
+                          child: Card(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('${perfumeData[index].name}'),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Image.network(
+                                      '${perfumeData[index].imageUrl}'),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text("Release Year: " +
+                                      '${perfumeData[index].releaseYear}'),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "\$" + '${perfumeData[index].price}',
+                                  ),
+                                ],
                               ),
-                              Image.asset(
-                                  "images/lancome_idole_eau_de_parfum_nectar_.png",
-                                  height: 170,
-                                  width: 170,
-                                  fit: BoxFit.cover),
-                              const SizedBox(height: 10.0),
-                              Text(
-                                "\$225",
-                                style: AppWidget.lightText(),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 5.0),
-                    Container(
-                      margin: const EdgeInsets.all(5.0),
-                      child: Material(
-                        elevation: 10.0,
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Container(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text("Christian Dior Happy Hour"),
-                              const SizedBox(height: 5.0),
-                              Text(
-                                "50ml",
-                                style: AppWidget.lightText(),
-                              ),
-                              Image.asset(
-                                  "images/CHRISTIAN-DIOR-Happy-Hour.png",
-                                  height: 170,
-                                  width: 170,
-                                  fit: BoxFit.cover),
-                              const SizedBox(height: 10.0),
-                              Text(
-                                "\$249",
-                                style: AppWidget.lightText(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                        ));
+                  },
                 ),
               ),
             ],
