@@ -23,30 +23,6 @@ class _ProState extends State<Profile> {
     fetchUserData();
   }
 
-  Future<void> fetchUserData() async {
-    try {
-      final response = await http.get(Uri.parse(
-          'http://www.perfumestore.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
-
-      if (response.statusCode == 200) {
-        setState(() {
-          user = json.decode(response.body);
-          isLoading = false;
-        });
-      } else {
-        setState(() {
-          errorMessage = 'Failed to load user data: ${response.statusCode}';
-          isLoading = false;
-        });
-      }
-    } catch (e) {
-      setState(() {
-        errorMessage = 'An error occurred: $e';
-        isLoading = false;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,15 +73,16 @@ class _ProState extends State<Profile> {
                                             minRadius: 45,
                                             maxRadius: 50,
                                             child: ClipOval(
-                                                child: Image.asset(
-                                              "images/avt1.jfif",
+                                                child: Image.network(
+                                              user['profileUrl'] ??
+                                                  "default_image_url",
                                               width: 100,
                                               height: 100,
                                               fit: BoxFit.cover,
                                             ))),
                                         const SizedBox(width: 15),
                                         Text(
-                                          user['firstName'] ?? "Unknown User",
+                                          '${user['firstName'] ?? "Unknown"} ${user['lastName'] ?? "User"}',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w400),
@@ -152,7 +129,7 @@ class _ProState extends State<Profile> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.w300),
                                         ),
-                                        const SizedBox(width: 70),
+                                        const SizedBox(width: 50),
                                         const Text(
                                           "View Purchase History >",
                                           style: TextStyle(
@@ -171,5 +148,29 @@ class _ProState extends State<Profile> {
                       ],
                     ),
                   ));
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'http://www.perfumestore.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
+
+      if (response.statusCode == 200) {
+        setState(() {
+          user = json.decode(response.body);
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          errorMessage = 'Failed to load user data: ${response.statusCode}';
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'An error occurred: $e';
+        isLoading = false;
+      });
+    }
   }
 }
