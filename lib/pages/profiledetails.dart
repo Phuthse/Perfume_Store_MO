@@ -87,8 +87,9 @@ class _ProfiledetailsState extends State<Profiledetails> {
                                 minRadius: 45,
                                 maxRadius: 50,
                                 child: ClipOval(
-                                  child: Image.asset(
-                                    'images/avt1.jfif', // Giữ nguyên hình ảnh mặc định
+                                  child: Image.network(
+                                    userData![
+                                        'profileUrl'], // Giữ nguyên hình ảnh mặc định
                                     width: 100,
                                     height: 100,
                                     fit: BoxFit.cover,
@@ -108,7 +109,9 @@ class _ProfiledetailsState extends State<Profiledetails> {
                   ),
                   const SizedBox(height: 10),
                   buildProfileDetail(
-                      "Name", userData!['firstName'] ?? 'No Name', context),
+                      "Name",
+                      '${userData!['firstName'] ?? 'No'} ${userData!['lastName'] ?? 'Name'}',
+                      context),
                   const SizedBox(height: 10),
                   buildProfileDetail(
                       "Email", userData!['email'] ?? 'No Email', context),

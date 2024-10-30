@@ -112,11 +112,12 @@ class Productdetails extends StatefulWidget {
 }
 
 class _ProductdetailsState extends State<Productdetails> {
+  int q = 1;
   // Khai báo các biến trạng thái nếu cần
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
-    int q = 1; //quantity
+    //quantity
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -125,114 +126,116 @@ class _ProductdetailsState extends State<Productdetails> {
             },
             icon: Icon(Icons.arrow_back)),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(
-              "${widget.product.imageUrl}",
-              fit: BoxFit.fill,
-              width: 500,
-              height: 400,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text("${widget.product.name}", style: TextStyle(fontSize: 22)),
-            const SizedBox(
-              height: 5,
-            ),
-            Text("${widget.product.brand}",
-                style: TextStyle(fontSize: 16)),
-            const SizedBox(
-              height: 5,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text("Release Year: ${widget.product.releaseYear}",
-                style: TextStyle(fontSize: 16)),
-            const SizedBox(
-              height: 5,
-            ),
-            Text("${widget.product.volume}" + " ml",
-                style: TextStyle(fontSize: 16)),
-            const SizedBox(
-              height: 5,
-            ),
-            Text("${widget.product.description}",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300)),
-            const SizedBox(
-              height: 10,
-            ),
-            Text("\$${widget.product.price}",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 100.0),
-              child: Row(
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        if (q > 1) {
-                          q--;
-                        }
-                        setState(() {});
-                      },
-                      child: Container(
-                          child:
-                              const Icon(Icons.remove, color: Colors.black))),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 1),
-                        borderRadius: BorderRadius.circular(25)),
-                    child: Text(q.toString(), style: AppWidget.boldText()),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        q++;
-                        setState(() {});
-                      },
-                      child: Container(
-                          child: const Icon(Icons.add, color: Colors.black))),
-                  const SizedBox(height: 20.0),
-                ],
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(
+                "${widget.product.imageUrl}",
+                fit: BoxFit.fill,
+                width: 500,
+                height: 400,
               ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Cart()));
-              },
-              child: Container(
-                margin: const EdgeInsets.only(left: 23),
-                padding: const EdgeInsets.only(
-                    left: 130, top: 15, bottom: 15, right: 130),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: new Radius.circular(5.0),
-                      topRight: new Radius.circular(15.0),
-                      bottomLeft: new Radius.circular(15.0),
-                      bottomRight: new Radius.circular(5.0),
-                    )),
-                child: Text("Add To Cart", style: AppWidget.whiteText()),
+              const SizedBox(
+                height: 10,
               ),
-            ),
-          ],
+              Text("${widget.product.name}", style: TextStyle(fontSize: 22)),
+              const SizedBox(
+                height: 5,
+              ),
+              Text("${widget.product.brand}", style: TextStyle(fontSize: 16)),
+              const SizedBox(
+                height: 5,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text("Release Year: ${widget.product.releaseYear}",
+                  style: TextStyle(fontSize: 16)),
+              const SizedBox(
+                height: 5,
+              ),
+              Text("${widget.product.volume}" + " ml",
+                  style: TextStyle(fontSize: 16)),
+              const SizedBox(
+                height: 5,
+              ),
+              Text("${widget.product.description}",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300)),
+              const SizedBox(
+                height: 10,
+              ),
+              Text("\$${widget.product.price}",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(right: 100.0),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          if (q > 1) {
+                            q--;
+                          }
+                          setState(() {});
+                        },
+                        child: Container(
+                            child:
+                                const Icon(Icons.remove, color: Colors.black))),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 20, right: 20),
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 1),
+                          borderRadius: BorderRadius.circular(25)),
+                      child: Text(q.toString(), style: AppWidget.boldText()),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          q++;
+                          setState(() {});
+                        },
+                        child: Container(
+                            child: const Icon(Icons.add, color: Colors.black))),
+                    const SizedBox(height: 20.0),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Cart()));
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(left: 23),
+                  padding: const EdgeInsets.only(
+                      left: 130, top: 15, bottom: 15, right: 130),
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: new Radius.circular(5.0),
+                        topRight: new Radius.circular(15.0),
+                        bottomLeft: new Radius.circular(15.0),
+                        bottomRight: new Radius.circular(5.0),
+                      )),
+                  child: Text("Add To Cart", style: AppWidget.whiteText()),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
