@@ -32,16 +32,16 @@ class _SearchState extends State<Search> {
       appBar: AppBar(
         leading: IconButton(onPressed: (){
           Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back)),
+        }, icon: const Icon(Icons.arrow_back)),
       ),
       body: Column(
         children:<Widget> [
           Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             child: TextField(
               controller: searchcontroller,
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 hintText: 'Perfume name',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),

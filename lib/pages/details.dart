@@ -5,7 +5,7 @@ import 'package:perfume_store_mo/widget/widget_support.dart';
 class Details extends StatefulWidget {
   final Map<String, dynamic> perfume; // Nhận dữ liệu nước hoa từ API
 
-  const Details({Key? key, required this.perfume}) : super(key: key);
+  const Details({super.key, required this.perfume});
 
   @override
   State<Details> createState() => _DetailsState();

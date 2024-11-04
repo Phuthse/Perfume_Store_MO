@@ -91,12 +91,12 @@ class _BestsellerState extends State<Bestseller> {
                         ),
                         const SizedBox(height: 10.0),
                         Text(
-                          '${perfumeData[index].volume}' + " ml",
+                          '${perfumeData[index].volume}' " ml",
                         ),
                         const SizedBox(height: 5.0),
                         Text(
-                          "\$" + '${perfumeData[index].price}',
-                          style: TextStyle(
+                          "\$" '${perfumeData[index].price}',
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
                         ),

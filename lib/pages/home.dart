@@ -31,13 +31,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Navbarmenu(),
+      drawer: const Navbarmenu(),
       appBar: AppBar(
-        actionsIconTheme: IconThemeData(color: Colors.blueGrey),
+        actionsIconTheme: const IconThemeData(color: Colors.blueGrey),
         actions: [
           IconButton(onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
-          }, icon: Icon(Icons.search)),
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const Search()));
+          }, icon: const Icon(Icons.search)),
         ],
       ),
       body: Container(
@@ -67,10 +67,10 @@ class _HomeState extends State<Home> {
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 54, 52, 52),
                           borderRadius: BorderRadius.only(
-                            topLeft: new Radius.circular(5.0),
-                            topRight: new Radius.circular(15.0),
-                            bottomLeft: new Radius.circular(15.0),
-                            bottomRight: new Radius.circular(5.0),
+                            topLeft: const Radius.circular(5.0),
+                            topRight: const Radius.circular(15.0),
+                            bottomLeft: const Radius.circular(15.0),
+                            bottomRight: const Radius.circular(5.0),
                           )),
                       child: Text(
                         "see all>",
@@ -107,29 +107,29 @@ class _HomeState extends State<Home> {
                       },
                       child: Container(
                         width: 199,
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Card(
                           color: Colors.white,
                           child: Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('${perfumeData[index].name}'),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Image.network('${perfumeData[index].imageUrl}'),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  '${perfumeData[index].volume}' + " ml",
+                                  '${perfumeData[index].volume}' " ml",
                                 ),
                                 Text(
-                                  "\$" + '${perfumeData[index].price}',
-                                  style: TextStyle(
+                                  "\$" '${perfumeData[index].price}',
+                                  style: const TextStyle(
                                     fontSize: 18,
                                   ),
                                 ),
@@ -162,10 +162,10 @@ class _HomeState extends State<Home> {
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 54, 52, 52),
                           borderRadius: BorderRadius.only(
-                            topLeft: new Radius.circular(5.0),
-                            topRight: new Radius.circular(15.0),
-                            bottomLeft: new Radius.circular(15.0),
-                            bottomRight: new Radius.circular(5.0),
+                            topLeft: const Radius.circular(5.0),
+                            topRight: const Radius.circular(15.0),
+                            bottomLeft: const Radius.circular(15.0),
+                            bottomRight: const Radius.circular(5.0),
                           )),
                       child: Text(
                         "see all>",
@@ -181,7 +181,7 @@ class _HomeState extends State<Home> {
               ),
               const SizedBox(height: 25.0),
               Container(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 height: 300,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -201,32 +201,31 @@ class _HomeState extends State<Home> {
                         },
                         child: Container(
                           width: 200,
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               right: 5), // Khoảng cách giữa các item
                           child: Card(
                             color: Colors.white,
                             child: Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('${perfumeData[index].name}'),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Image.network(
                                       '${perfumeData[index].imageUrl}'),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
-                                  Text("Release Year: " +
-                                      '${perfumeData[index].releaseYear}'),
-                                  SizedBox(
+                                  Text("Release Year: " '${perfumeData[index].releaseYear}'),
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
-                                    "\$" + '${perfumeData[index].price}',
+                                    "\$" '${perfumeData[index].price}',
                                   ),
                                 ],
                               ),

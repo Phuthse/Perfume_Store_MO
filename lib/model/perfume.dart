@@ -72,25 +72,25 @@ class Perfume {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['perfumeId'] = this.perfumeId;
-    data['name'] = this.name;
-    data['brand'] = this.brand;
-    data['scent'] = this.scent;
-    data['gender'] = this.gender;
-    data['price'] = this.price;
-    data['stockQuantity'] = this.stockQuantity;
-    data['description'] = this.description;
-    data['imageUrl'] = this.imageUrl;
-    data['viewCount'] = this.viewCount;
-    data['origin'] = this.origin;
-    data['releaseYear'] = this.releaseYear;
-    data['volume'] = this.volume;
-    data['discount'] = this.discount;
-    data['topNote'] = this.topNote;
-    data['middleNote'] = this.middleNote;
-    data['baseNote'] = this.baseNote;
-    data['dateAdded'] = this.dateAdded;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['perfumeId'] = perfumeId;
+    data['name'] = name;
+    data['brand'] = brand;
+    data['scent'] = scent;
+    data['gender'] = gender;
+    data['price'] = price;
+    data['stockQuantity'] = stockQuantity;
+    data['description'] = description;
+    data['imageUrl'] = imageUrl;
+    data['viewCount'] = viewCount;
+    data['origin'] = origin;
+    data['releaseYear'] = releaseYear;
+    data['volume'] = volume;
+    data['discount'] = discount;
+    data['topNote'] = topNote;
+    data['middleNote'] = middleNote;
+    data['baseNote'] = baseNote;
+    data['dateAdded'] = dateAdded;
 
     return data;
   }

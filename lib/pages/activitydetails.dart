@@ -35,12 +35,12 @@ class _ActivitydetailsState extends State<Activitydetails> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 80,
                     ),
                     Container(
                       padding: const EdgeInsets.all(4.0),
-                      child: Text(
+                      child: const Text(
                         "Reviews & Ratings",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
@@ -56,8 +56,8 @@ class _ActivitydetailsState extends State<Activitydetails> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
-                        margin: EdgeInsets.only(top: 30, left: 53, right: 55),
-                        decoration: BoxDecoration(
+                        margin: const EdgeInsets.only(top: 30, left: 53, right: 55),
+                        decoration: const BoxDecoration(
                             border: Border(
                                 bottom:
                                     BorderSide(color: Colors.black, width: 3))),
@@ -68,34 +68,34 @@ class _ActivitydetailsState extends State<Activitydetails> {
                                   color:
                                       const Color.fromARGB(255, 255, 255, 255),
                                   borderRadius: BorderRadius.circular(10)),
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                   left: 30, right: 30, top: 10, bottom: 10),
                               child: Column(
                                 children: [
                                   Container(
-                                    child: Text(
+                                    child: const Text(
                                       "BVLGARI Rose Goldea",
                                       style: TextStyle(fontSize: 18),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Container(
                                     child: Row(
                                       children: [
                                         Container(
-                                            child: Text(
+                                            child: const Text(
                                           "50ml",
                                           style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w300),
                                         )),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 100,
                                         ),
                                         Container(
-                                            child: Text("\$229",
+                                            child: const Text("\$229",
                                                 style: TextStyle(
                                                     fontSize: 17,
                                                     fontWeight:
@@ -122,18 +122,18 @@ class _ActivitydetailsState extends State<Activitydetails> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
+                      margin: const EdgeInsets.only(left: 10, right: 10),
                       child: Row(
                         children: [
                           Text(
                             "4.8",
                             style: Theme.of(context).textTheme.displayLarge,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -159,7 +159,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                                           backgroundColor: Colors.grey,
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          valueColor: AlwaysStoppedAnimation(
+                                          valueColor: const AlwaysStoppedAnimation(
                                               Color.fromARGB(
                                                   113, 246, 160, 210)),
                                         ),
@@ -187,7 +187,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                                           backgroundColor: Colors.grey,
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          valueColor: AlwaysStoppedAnimation(
+                                          valueColor: const AlwaysStoppedAnimation(
                                               Color.fromARGB(
                                                   113, 246, 160, 210)),
                                         ),
@@ -215,7 +215,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                                           backgroundColor: Colors.grey,
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          valueColor: AlwaysStoppedAnimation(
+                                          valueColor: const AlwaysStoppedAnimation(
                                               Color.fromARGB(
                                                   113, 246, 160, 210)),
                                         ),
@@ -243,7 +243,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                                           backgroundColor: Colors.grey,
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          valueColor: AlwaysStoppedAnimation(
+                                          valueColor: const AlwaysStoppedAnimation(
                                               Color.fromARGB(
                                                   113, 246, 160, 210)),
                                         ),
@@ -269,7 +269,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                                           backgroundColor: Colors.grey,
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          valueColor: AlwaysStoppedAnimation(
+                                          valueColor: const AlwaysStoppedAnimation(
                                               Color.fromARGB(
                                                   113, 246, 160, 210)),
                                         ),
@@ -284,7 +284,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
+                      margin: const EdgeInsets.only(left: 10, right: 10),
                       child: RatingBar.builder(
                         initialRating: 4.5,
                         minRating: 0.01,
@@ -292,8 +292,8 @@ class _ActivitydetailsState extends State<Activitydetails> {
                         allowHalfRating: true,
                         itemCount: 5,
                         itemSize: 15,
-                        itemPadding: EdgeInsets.symmetric(horizontal: 1),
-                        itemBuilder: (context, _) => Icon(
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 1),
+                        itemBuilder: (context, _) => const Icon(
                           Icons.star,
                           color: Color.fromARGB(113, 246, 160, 210),
                         ),
@@ -303,14 +303,14 @@ class _ActivitydetailsState extends State<Activitydetails> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
-                      child: Text(" 1,230")),
-                    SizedBox(
+                      margin: const EdgeInsets.only(left: 10, right: 10),
+                      child: const Text(" 1,230")),
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
-                      child: Row(
+                      margin: const EdgeInsets.only(left: 10, right: 10),
+                      child: const Row(
                         children: [
                           Column(
                             children: [
@@ -336,11 +336,11 @@ class _ActivitydetailsState extends State<Activitydetails> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
+                      margin: const EdgeInsets.only(left: 10, right: 10),
                       child: Row(
                         children: [
                           Container(
@@ -351,8 +351,8 @@ class _ActivitydetailsState extends State<Activitydetails> {
                               allowHalfRating: true,
                               itemCount: 5,
                               itemSize: 15,
-                              itemPadding: EdgeInsets.symmetric(horizontal: 1),
-                              itemBuilder: (context, _) => Icon(
+                              itemPadding: const EdgeInsets.symmetric(horizontal: 1),
+                              itemBuilder: (context, _) => const Icon(
                                 Icons.star,
                                 color: Color.fromARGB(113, 246, 160, 210),
                               ),
@@ -361,15 +361,15 @@ class _ActivitydetailsState extends State<Activitydetails> {
                               },
                             ),
                           ),
-                          SizedBox(width: 25,),
-                          Container(child: Text("01/10/2024"),),
+                          const SizedBox(width: 25,),
+                          Container(child: const Text("01/10/2024"),),
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Container(
-                      margin: EdgeInsets.only(left: 10, right: 10),
-                      child: Text("This is one of my favorite perfumes, it has a gentle scent suitable for dates."),
+                      margin: const EdgeInsets.only(left: 10, right: 10),
+                      child: const Text("This is one of my favorite perfumes, it has a gentle scent suitable for dates."),
                     )
                   ],
                 ),

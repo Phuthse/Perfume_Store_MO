@@ -38,7 +38,7 @@ class _StartState extends State<Start> {
                         const Color.fromARGB(255, 62, 62, 62).withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 5), // changes position of shadow
+                    offset: const Offset(0, 5), // changes position of shadow
                   ),
                 ],
               ),
@@ -57,7 +57,7 @@ class _StartState extends State<Start> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Get Started",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),

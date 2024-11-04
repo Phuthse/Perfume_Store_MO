@@ -38,14 +38,14 @@ class _ActivityState extends State<Activity> {
               ),
               const SizedBox(height: 25.0),
               Container(
-                margin: EdgeInsets.only(left: 160),
+                margin: const EdgeInsets.only(left: 160),
                 child: Text(
                   "Activity",
                   style: AppWidget.headLineText(),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 60),
+                margin: const EdgeInsets.only(left: 60),
                 child: Text(
                   "Click on product to see User Reviews",
                   style: AppWidget.lightText(),

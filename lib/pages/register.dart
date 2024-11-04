@@ -20,42 +20,40 @@ class _RegisterState extends State<Register> {
   final _formkey = GlobalKey<FormState>();
 
   registration() async {
-    if (password != null) {
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+        "Registered Successfully!",
+        style: TextStyle(fontSize: 20.0),
+      )));
+
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Bottomnav()));
+    } on FirebaseException catch (e) {
+      if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-          "Registered Successfully!",
-          style: TextStyle(fontSize: 20.0),
+          "Password Provided is too weak",
+          style: TextStyle(fontSize: 18.0),
         )));
-
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Bottomnav()));
-      } on FirebaseException catch (e) {
-        if (e.code == 'weak-password') {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-            "Password Provided is too weak",
-            style: TextStyle(fontSize: 18.0),
-          )));
-        } else if (e.code == 'email-already-in-use') {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-            "Account already exist",
-            style: TextStyle(fontSize: 18.0),
-          )));
-        } else if (e.code == 'invalid-email') {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-            "Email address is wrong formatted",
-            style: TextStyle(fontSize: 18.0, color: Colors.black),
-          )));
-        }
+      } else if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          "Account already exist",
+          style: TextStyle(fontSize: 18.0),
+        )));
+      } else if (e.code == 'invalid-email') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          "Email address is wrong formatted",
+          style: TextStyle(fontSize: 18.0, color: Colors.black),
+        )));
       }
     }
-  }
+    }
 
   @override
   Widget build(BuildContext context) {

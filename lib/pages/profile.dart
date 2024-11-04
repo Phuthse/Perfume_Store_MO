@@ -26,7 +26,7 @@ class _ProState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: Navbarmenu(),
+        drawer: const Navbarmenu(),
         appBar: AppBar(
           backgroundColor: Colors.white,
           actionsIconTheme: const IconThemeData(color: Colors.blueGrey),
@@ -112,25 +112,25 @@ class _ProState extends State<Profile> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
+                                    decoration: const BoxDecoration(
+                                        color: Color.fromARGB(
                                             255, 255, 255, 255),
                                         border: Border(
                                             bottom: BorderSide(
                                                 width: 2,
                                                 color: Colors.black))),
-                                    child: Row(
+                                    child: const Row(
                                       children: [
-                                        const Icon(Icons.wysiwyg),
-                                        const SizedBox(width: 10),
-                                        const Text(
+                                        Icon(Icons.wysiwyg),
+                                        SizedBox(width: 10),
+                                        Text(
                                           "My Purchase",
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w300),
                                         ),
-                                        const SizedBox(width: 50),
-                                        const Text(
+                                        SizedBox(width: 50),
+                                        Text(
                                           "View Purchase History >",
                                           style: TextStyle(
                                               fontSize: 16,

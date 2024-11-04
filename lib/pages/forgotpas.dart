@@ -12,7 +12,7 @@ class Forgotpas extends StatefulWidget {
 }
 
 class _ForgotpasState extends State<Forgotpas> {
-  TextEditingController emailcontroller = new TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
 
   String email = "";
   final _formkey = GlobalKey<FormState>();
@@ -20,14 +20,14 @@ class _ForgotpasState extends State<Forgotpas> {
   resetPassword() async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
         "Password Recovery has been sent!",
         style: TextStyle(fontSize: 18),
       )));
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
           "No User found for that Email",
           style: TextStyle(fontSize: 18),
@@ -51,31 +51,31 @@ class _ForgotpasState extends State<Forgotpas> {
       body: Container(
         child: Column(
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Container(
               alignment: Alignment.topCenter,
               child: Text("Password Recovery", style: AppWidget.boldText()),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             Text(
               "Enter your email",
               style: AppWidget.lightText(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50.0,
             ),
             Expanded(
                 child: Form(
                     key: _formkey,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10, right: 10),
+                      padding: const EdgeInsets.only(left: 10, right: 10),
                       child: ListView(
                         children: [
                           Container(
                             padding:
-                                EdgeInsets.only(left: 10, top: 2, bottom: 2),
+                                const EdgeInsets.only(left: 10, top: 2, bottom: 2),
                             decoration: BoxDecoration(
                               border:
                                   Border.all(color: Colors.black, width: 2.0),
@@ -89,8 +89,8 @@ class _ForgotpasState extends State<Forgotpas> {
                                 }
                                 return null;
                               },
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
                                 hintText: "Email",
                                 hintStyle: TextStyle(
                                     fontSize: 18, color: Colors.black),
@@ -102,7 +102,7 @@ class _ForgotpasState extends State<Forgotpas> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 50.0,
                           ),
                           GestureDetector(
@@ -124,12 +124,12 @@ class _ForgotpasState extends State<Forgotpas> {
                                 children: [
                                   Container(
                                     width: 200,
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: Colors.black,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       "Send Email",
                                       style: TextStyle(
                                         color: Colors.white,
@@ -142,7 +142,7 @@ class _ForgotpasState extends State<Forgotpas> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 50.0,
                           ),
                           Container(

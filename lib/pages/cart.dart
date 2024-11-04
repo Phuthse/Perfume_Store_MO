@@ -24,7 +24,7 @@ class _CartState extends State<Cart> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 45, top: 65, left: 10),
+                margin: const EdgeInsets.only(right: 45, top: 65, left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -44,7 +44,7 @@ class _CartState extends State<Cart> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           border: Border(
                               bottom:
                                   BorderSide(color: Colors.black, width: 3))),
@@ -59,8 +59,8 @@ class _CartState extends State<Cart> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                decoration: const BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
                             color: Color.fromARGB(95, 233, 157, 201),
@@ -80,18 +80,18 @@ class _CartState extends State<Cart> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("BVLGARI Rose Goldea"),
-                          SizedBox(
+                          const Text("BVLGARI Rose Goldea"),
+                          const SizedBox(
                             height: 25,
                           ),
-                          Text("size: 50ml"),
-                          SizedBox(
+                          const Text("size: 50ml"),
+                          const SizedBox(
                             height: 5,
                           ),
                           Container(
                             child: Row(
                               children: [
-                                Text(
+                                const Text(
                                   "\$229.00",
                                   style: TextStyle(color: Colors.red),
                                 ),
@@ -109,11 +109,11 @@ class _CartState extends State<Cart> {
                                           child: Container(
                                               child: const Icon(Icons.remove,
                                                   color: Colors.black))),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Container(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             left: 20, right: 20),
                                         decoration: BoxDecoration(
                                             border: Border.all(width: 1),
@@ -122,7 +122,7 @@ class _CartState extends State<Cart> {
                                         child: Text(q.toString(),
                                             style: AppWidget.boldText()),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       GestureDetector(
@@ -146,8 +146,8 @@ class _CartState extends State<Cart> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 15, right: 15),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                decoration: const BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
                             color: Color.fromARGB(95, 233, 157, 201),
@@ -167,18 +167,18 @@ class _CartState extends State<Cart> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Lancome Idol Idole Nectar"),
-                          SizedBox(
+                          const Text("Lancome Idol Idole Nectar"),
+                          const SizedBox(
                             height: 25,
                           ),
-                          Text("size: 50ml"),
-                          SizedBox(
+                          const Text("size: 50ml"),
+                          const SizedBox(
                             height: 5,
                           ),
                           Container(
                             child: Row(
                               children: [
-                                Text(
+                                const Text(
                                   "\$218.00",
                                   style: TextStyle(color: Colors.red),
                                 ),
@@ -196,11 +196,11 @@ class _CartState extends State<Cart> {
                                           child: Container(
                                               child: const Icon(Icons.remove,
                                                   color: Colors.black))),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Container(
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             left: 20, right: 20),
                                         decoration: BoxDecoration(
                                             border: Border.all(width: 1),
@@ -209,7 +209,7 @@ class _CartState extends State<Cart> {
                                         child: Text(q1.toString(),
                                             style: AppWidget.boldText()),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       GestureDetector(
@@ -241,7 +241,7 @@ class _CartState extends State<Cart> {
                   left: 10,
                   right: 10,
                 ),
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -266,11 +266,11 @@ class _CartState extends State<Cart> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(95, 233, 157, 201),
+                            color: const Color.fromARGB(95, 233, 157, 201),
                             borderRadius: BorderRadius.circular(15)),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             top: 23, bottom: 23, left: 25, right: 25),
-                        child: Text(
+                        child: const Text(
                           "Check Out (3)",
                           style: TextStyle(fontSize: 18),
                         ),

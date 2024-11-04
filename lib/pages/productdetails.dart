@@ -105,7 +105,7 @@ import 'package:perfume_store_mo/widget/widget_support.dart';
 class Productdetails extends StatefulWidget {
   final Perfume product;
 
-  Productdetails({required this.product});
+  const Productdetails({super.key, required this.product});
 
   @override
   _ProductdetailsState createState() => _ProductdetailsState();
@@ -124,12 +124,12 @@ class _ProductdetailsState extends State<Productdetails> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -142,11 +142,11 @@ class _ProductdetailsState extends State<Productdetails> {
               const SizedBox(
                 height: 10,
               ),
-              Text("${widget.product.name}", style: TextStyle(fontSize: 22)),
+              Text("${widget.product.name}", style: const TextStyle(fontSize: 22)),
               const SizedBox(
                 height: 5,
               ),
-              Text("${widget.product.brand}", style: TextStyle(fontSize: 16)),
+              Text("${widget.product.brand}", style: const TextStyle(fontSize: 16)),
               const SizedBox(
                 height: 5,
               ),
@@ -154,22 +154,22 @@ class _ProductdetailsState extends State<Productdetails> {
                 height: 5,
               ),
               Text("Release Year: ${widget.product.releaseYear}",
-                  style: TextStyle(fontSize: 16)),
+                  style: const TextStyle(fontSize: 16)),
               const SizedBox(
                 height: 5,
               ),
-              Text("${widget.product.volume}" + " ml",
-                  style: TextStyle(fontSize: 16)),
+              Text("${widget.product.volume}" " ml",
+                  style: const TextStyle(fontSize: 16)),
               const SizedBox(
                 height: 5,
               ),
               Text("${widget.product.description}",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300)),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300)),
               const SizedBox(
                 height: 10,
               ),
               Text("\$${widget.product.price}",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(
                 height: 10,
               ),
@@ -187,17 +187,17 @@ class _ProductdetailsState extends State<Productdetails> {
                         child: Container(
                             child:
                                 const Icon(Icons.remove, color: Colors.black))),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: 20, right: 20),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
                       decoration: BoxDecoration(
                           border: Border.all(width: 1),
                           borderRadius: BorderRadius.circular(25)),
                       child: Text(q.toString(), style: AppWidget.boldText()),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
@@ -211,7 +211,7 @@ class _ProductdetailsState extends State<Productdetails> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               GestureDetector(
@@ -226,10 +226,10 @@ class _ProductdetailsState extends State<Productdetails> {
                   decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.only(
-                        topLeft: new Radius.circular(5.0),
-                        topRight: new Radius.circular(15.0),
-                        bottomLeft: new Radius.circular(15.0),
-                        bottomRight: new Radius.circular(5.0),
+                        topLeft: const Radius.circular(5.0),
+                        topRight: const Radius.circular(15.0),
+                        bottomLeft: const Radius.circular(15.0),
+                        bottomRight: const Radius.circular(5.0),
                       )),
                   child: Text("Add To Cart", style: AppWidget.whiteText()),
                 ),

@@ -19,24 +19,24 @@ class _LogInState extends State<LogIn> {
   String email = "", password = "";
   final _formkey = GlobalKey<FormState>();
 
-  TextEditingController useremailcontroller = new TextEditingController();
-  TextEditingController userpasswordcontroller = new TextEditingController();
+  TextEditingController useremailcontroller = TextEditingController();
+  TextEditingController userpasswordcontroller = TextEditingController();
 
   userLogin() async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Bottomnav()));
+          context, MaterialPageRoute(builder: (context) => const Bottomnav()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
           "Email address is wrong formatted",
           style: TextStyle(fontSize: 18.0, color: Colors.white),
         )));
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
           "Wrong Email or Password, please try again",
           style: TextStyle(fontSize: 18.0, color: Colors.white),
@@ -141,7 +141,7 @@ class _LogInState extends State<LogIn> {
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 0, 0, 0),
                             borderRadius: BorderRadius.circular(10.0),
-                            border: Border(
+                            border: const Border(
                                 bottom:
                                     BorderSide(color: Colors.black, width: 1))),
                         padding: const EdgeInsets.only(
@@ -153,7 +153,7 @@ class _LogInState extends State<LogIn> {
                       height: 60.0,
                     ),
                     Container(
-                      child: Text("OR",
+                      child: const Text("OR",
                           style: TextStyle(color: Colors.white, fontSize: 18)),
                     ),
                     const SizedBox(
@@ -217,11 +217,11 @@ class _LogInState extends State<LogIn> {
 
     if (userCredential.user != null) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Bottomnav()));
+          .push(MaterialPageRoute(builder: (context) => const Bottomnav()));
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
-        "Sign in as " + (userCredential.user!.displayName!),
-        style: TextStyle(fontSize: 18.0, color: Colors.white),
+        "Sign in as ${userCredential.user!.displayName!}",
+        style: const TextStyle(fontSize: 18.0, color: Colors.white),
       )));
     }
   }

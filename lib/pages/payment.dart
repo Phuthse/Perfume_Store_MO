@@ -21,7 +21,7 @@ class _PaymentState extends State<Payment> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 45, top: 65, left: 10),
+                margin: const EdgeInsets.only(right: 45, top: 65, left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -41,7 +41,7 @@ class _PaymentState extends State<Payment> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           border: Border(
                               bottom:
                                   BorderSide(color: Colors.black, width: 3))),
@@ -53,10 +53,10 @@ class _PaymentState extends State<Payment> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10, left: 5, right: 5),
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(96, 210, 209, 209),
+                margin: const EdgeInsets.only(top: 10, left: 5, right: 5),
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(96, 210, 209, 209),
                     border: Border(
                         left: BorderSide(
                             color: Color.fromARGB(95, 233, 157, 201),
@@ -71,13 +71,13 @@ class _PaymentState extends State<Payment> {
                             child: Row(
                               children: [
                                 Container(
-                                  child: Icon(Icons.money),
+                                  child: const Icon(Icons.money),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Container(
-                                  child: Text(
+                                  child: const Text(
                                     "Cash on Delivery",
                                     style: TextStyle(
                                         fontSize: 18,
@@ -96,20 +96,20 @@ class _PaymentState extends State<Payment> {
               ),
               const SizedBox(height: 630.0),
               Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 231, 228, 228)),
-                padding: EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 231, 228, 228)),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 18),
+                      margin: const EdgeInsets.only(left: 18),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(95, 233, 157, 201),
+                          color: const Color.fromARGB(95, 233, 157, 201),
                           borderRadius: BorderRadius.circular(15)),
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           top: 20, bottom: 20, left: 150, right: 150),
-                      child: Text(
+                      child: const Text(
                         "Confirm",
                         style: TextStyle(fontSize: 18),
                       ),

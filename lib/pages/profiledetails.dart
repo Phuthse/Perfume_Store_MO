@@ -41,7 +41,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Bottomnav()));
+                context, MaterialPageRoute(builder: (context) => const Bottomnav()));
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -53,7 +53,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
           IconButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Bottomnav()));
+                  MaterialPageRoute(builder: (context) => const Bottomnav()));
             },
             icon: const Icon(Icons.done_outlined),
           ),
@@ -76,7 +76,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            border: Border(
+                            border: const Border(
                                 bottom:
                                     BorderSide(width: 1, color: Colors.black)),
                           ),
@@ -142,7 +142,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        border: Border(bottom: BorderSide(width: 1, color: Colors.black)),
+        border: const Border(bottom: BorderSide(width: 1, color: Colors.black)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +154,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
             onTap: () {
               // Thêm logic chỉnh sửa thông tin tại đây
             },
-            child: Text(value + " >", style: const TextStyle(fontSize: 16)),
+            child: Text("$value >", style: const TextStyle(fontSize: 16)),
           ),
         ],
       ),

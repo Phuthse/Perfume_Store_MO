@@ -72,8 +72,8 @@ class _LogInGoogleState extends State<LogInGoogle> {
           ),
           Text(_user!.email!),
           MaterialButton(
-            child: const Text("Log Out"),
             onPressed: _auth.signOut,
+            child: const Text("Log Out"),
           ),
         ],
       ),
@@ -82,8 +82,8 @@ class _LogInGoogleState extends State<LogInGoogle> {
 
   void _handleGoogleSignIn() {
     try {
-      GoogleAuthProvider _googleAuthProvider = GoogleAuthProvider();
-      _auth.signInWithProvider(_googleAuthProvider);
+      GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+      _auth.signInWithProvider(googleAuthProvider);
     } catch (error) {
       print(error);
     }

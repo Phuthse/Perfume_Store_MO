@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:perfume_store_mo/admin/adminhome.dart';
 import 'package:perfume_store_mo/service/database.dart';
 import 'package:random_string/random_string.dart';
 
@@ -13,7 +14,7 @@ class Addperfume extends StatefulWidget {
 }
 
 class _AddperfumeState extends State<Addperfume> {
-  
+  final List<String> perfumeitems = ['Fruity', 'Woody', 'Oriental', 'Fresh', 'Gentle'];
   String? value;
   TextEditingController namecontroller = new TextEditingController();
   TextEditingController pricecontroller = new TextEditingController();
@@ -36,7 +37,7 @@ class _AddperfumeState extends State<Addperfume> {
       String addId = randomAlphaNumeric(10);
 
       Reference firebaseStorageRef =
-          FirebaseStorage.instance.ref().child("blogImages").child(addId);
+          FirebaseStorage.instance.ref().child("perfumeImages").child(addId);
       final UploadTask task = firebaseStorageRef.putFile(selectedImage!);
 
       var downloadUrl = await (await task).ref.getDownloadURL();
@@ -54,6 +55,7 @@ class _AddperfumeState extends State<Addperfume> {
               "Perfume Item has been added Successfully",
               style: TextStyle(fontSize: 18.0),
             )));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Adminhome()));
       });
     }
   }
@@ -72,8 +74,8 @@ class _AddperfumeState extends State<Addperfume> {
             )),
         centerTitle: true,
         title: Text(
-          "Add Item",
-          
+          "Add Perfume Item",
+
         ),
       ),
       body: SingleChildScrollView(
@@ -85,7 +87,7 @@ class _AddperfumeState extends State<Addperfume> {
             children: [
               Text(
                 "Upload the Item Picture",
-                
+
               ),
               SizedBox(
                 height: 20.0,
@@ -141,7 +143,7 @@ class _AddperfumeState extends State<Addperfume> {
               ),
               Text(
                 "Item Name",
-               
+
               ),
               SizedBox(
                 height: 10.0,
@@ -157,7 +159,7 @@ class _AddperfumeState extends State<Addperfume> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Enter Item Name",
-                      ),
+),
                 ),
               ),
               SizedBox(
@@ -165,7 +167,7 @@ class _AddperfumeState extends State<Addperfume> {
               ),
               Text(
                 "Item Price",
-               
+
               ),
               SizedBox(
                 height: 10.0,
@@ -179,9 +181,9 @@ class _AddperfumeState extends State<Addperfume> {
                 child: TextField(
                   controller: pricecontroller,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter Item Price",
-                      ),
+                    border: InputBorder.none,
+                    hintText: "Enter Item Price",
+                  ),
                 ),
               ),
               SizedBox(
@@ -189,7 +191,6 @@ class _AddperfumeState extends State<Addperfume> {
               ),
               Text(
                 "Item Detail",
-           
               ),
               SizedBox(
                 height: 10.0,
@@ -204,8 +205,8 @@ class _AddperfumeState extends State<Addperfume> {
                   maxLines: 6,
                   controller: detailcontroller,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter Item Detail",
+                    border: InputBorder.none,
+                    hintText: "Enter Item Detail",
                   ),
                 ),
               ),
@@ -214,17 +215,45 @@ class _AddperfumeState extends State<Addperfume> {
               ),
               Text(
                 "Select Category",
-                
               ),
               SizedBox(
                 height: 20.0,
               ),
-              
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Color(0xFFececf8),
+                    borderRadius: BorderRadius.circular(10)),
+                child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                  items: perfumeitems
+                      .map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style:
+                                TextStyle(fontSize: 18.0, color: Colors.black),
+                          )))
+                      .toList(),
+                  onChanged: ((value) => setState(() {
+                        this.value = value;
+                      })),
+                  dropdownColor: Colors.white,
+                  hint: Text("Select Category"),
+                  iconSize: 36,
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black,
+                  ),
+                  value: value,
+                )),
+              ),
               SizedBox(
                 height: 30.0,
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   uploadItem();
                 },
                 child: Center(
