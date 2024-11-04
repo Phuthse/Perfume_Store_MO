@@ -87,8 +87,8 @@ class _HomeState extends State<Home> {
               const SizedBox(height: 25.0),
               Container(
                 padding: const EdgeInsets.only(
-                    top: 15, bottom: 5, right: 5),
-                height: 300,
+                    top: 20, bottom: 0, right: 5),
+                height: 305,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: perfumeData.length,
@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
                         child: Card(
                           color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,

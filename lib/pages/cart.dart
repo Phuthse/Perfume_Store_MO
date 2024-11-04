@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
 import 'package:perfume_store_mo/pages/checkout.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
+import 'package:http/http.dart' as http;
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -11,10 +13,35 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  int q = 2;
-  int q1 = 1;
+  Map<String, dynamic>? perfumeData;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPerfumesData();
+  }
+
+  Future<void> fetchPerfumesData() async {
+    final response = await http.get(Uri.parse(
+        'http://www.perfumestore.somee.com/perfume/22222222-2222-2222-2222-222222222222'));
+
+    if (response.statusCode == 200) {
+      // Giả sử phản hồi trả về là danh sách
+      perfumeData = json.decode(response.body);
+    } else {
+      throw Exception('Failed to load cart data');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    double total = 0.0;
+    if (perfumeData != null && perfumeData!['cartItems'] != null) {
+      total = perfumeData!['cartItems'].fold(0, (sum, item) {
+        return sum + (item['perfume']['price'] * item['quantity']);
+      });
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -23,6 +50,7 @@ class _CartState extends State<Cart> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              // Header
               Container(
                 margin: const EdgeInsets.only(right: 45, top: 65, left: 10),
                 child: Row(
@@ -58,181 +86,69 @@ class _CartState extends State<Cart> {
                   ],
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 15, right: 15),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            color: Color.fromARGB(95, 233, 157, 201),
-                            width: 3))),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(15.0),
-                      child: Image.asset(
-                        "images/BVLGARI-Rose-Goldea.jpg",
-                        width: MediaQuery.of(context).size.width / 4,
-                        height: MediaQuery.of(context).size.height / 8,
-                        fit: BoxFit.fill,
-                      ),
+
+              // Hiển thị các sản phẩm trong giỏ hàng
+              if (perfumeData != null && perfumeData!['cartItems'] != null)
+                ...perfumeData!['cartItems'].map<Widget>((item) {
+                  return Container(
+                    margin: const EdgeInsets.only(left: 15, right: 15),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                                color: Color.fromARGB(95, 233, 157, 201),
+                                width: 3))),
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(15.0),
+                          child: Image.network(
+                            item['perfume']['imageUrl'],
+                            width: MediaQuery.of(context).size.width / 4,
+                            height: MediaQuery.of(context).size.height / 8,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item['perfume']
+                                    ['name'], // Hiển thị tên nước hoa
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Volume: ${item['perfume']['volume']} ml", // Hiển thị thể tích
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              Text(
+                                "Quantity: ${item['quantity']}", // Hiển thị số lượng
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                "\$${(item['perfume']['price'] * item['quantity']).toStringAsFixed(2)}", // Giá tổng
+                                style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("BVLGARI Rose Goldea"),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          const Text("size: 50ml"),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            child: Row(
-                              children: [
-                                const Text(
-                                  "\$229.00",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 60.0),
-                                  child: Row(
-                                    children: [
-                                      GestureDetector(
-                                          onTap: () {
-                                            if (q > 2) {
-                                              q--;
-                                            }
-                                            setState(() {});
-                                          },
-                                          child: Container(
-                                              child: const Icon(Icons.remove,
-                                                  color: Colors.black))),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(25)),
-                                        child: Text(q.toString(),
-                                            style: AppWidget.boldText()),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            q++;
-                                            setState(() {});
-                                          },
-                                          child: Container(
-                                              child: const Icon(Icons.add,
-                                                  color: Colors.black))),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 15, right: 15),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            color: Color.fromARGB(95, 233, 157, 201),
-                            width: 3))),
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(15.0),
-                      child: Image.asset(
-                        "images/lancome_idole_eau_de_parfum_nectar_.png",
-                        width: MediaQuery.of(context).size.width / 4,
-                        height: MediaQuery.of(context).size.height / 8,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Lancome Idol Idole Nectar"),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          const Text("size: 50ml"),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            child: Row(
-                              children: [
-                                const Text(
-                                  "\$218.00",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 60.0),
-                                  child: Row(
-                                    children: [
-                                      GestureDetector(
-                                          onTap: () {
-                                            if (q1 > 1) {
-                                              q1--;
-                                            }
-                                            setState(() {});
-                                          },
-                                          child: Container(
-                                              child: const Icon(Icons.remove,
-                                                  color: Colors.black))),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, right: 20),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(25)),
-                                        child: Text(q1.toString(),
-                                            style: AppWidget.boldText()),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            q1++;
-                                            setState(() {});
-                                          },
-                                          child: Container(
-                                              child: const Icon(Icons.add,
-                                                  color: Colors.black))),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  );
+                }).toList()
+              else
+                const Center(
+                    child:
+                        CircularProgressIndicator()), // Hiển thị loading nếu chưa có dữ liệu
+
               const SizedBox(height: 365.0),
+
+              // Footer
               Container(
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 242, 240, 240),
@@ -250,9 +166,9 @@ class _CartState extends State<Cart> {
                       style:
                           TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                     ),
-                    const Text(
-                      "\$679.00",
-                      style: TextStyle(
+                    Text(
+                      "\$${total.toStringAsFixed(2)}", // Hiển thị tổng tiền
+                      style: const TextStyle(
                           color: Colors.red,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
@@ -270,8 +186,8 @@ class _CartState extends State<Cart> {
                             borderRadius: BorderRadius.circular(15)),
                         padding: const EdgeInsets.only(
                             top: 23, bottom: 23, left: 25, right: 25),
-                        child: const Text(
-                          "Check Out (3)",
+                        child: Text(
+                          "Check Out (${perfumeData != null && perfumeData!['cartItems'] != null ? perfumeData!['cartItems'].length : 0})",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),

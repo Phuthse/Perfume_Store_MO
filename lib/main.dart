@@ -16,25 +16,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      // home: StreamBuilder<User?>(
-      //   stream: FirebaseAuth.instance.authStateChanges(),
-      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-      //     if (snapshot.hasError) {
-      //       return Text(snapshot.error.toString());
-      //     }
+    return MaterialApp(
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
 
-      //     if (snapshot.connectionState == ConnectionState.active) {
-      //       if (snapshot.data == null) {
-      //         return LogIn();
-      //       } else {
-      //         return Bottomnav();
-      //       }
-      //     }
-      //     return Center(child: CircularProgressIndicator());
-      //   },
-      // ),
-    home: Adminlogin(),
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.data == null) {
+              return LogIn();
+            } else {
+              return Bottomnav();
+            }
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
+    //home: Adminlogin(),
     );
   }
 }

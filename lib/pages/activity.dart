@@ -38,9 +38,9 @@ class _ActivityState extends State<Activity> {
               ),
               const SizedBox(height: 25.0),
               Container(
-                margin: const EdgeInsets.only(left: 160),
+                margin: const EdgeInsets.only(left: 140),
                 child: Text(
-                  "Activity",
+                  "Activity Log",
                   style: AppWidget.headLineText(),
                 ),
               ),

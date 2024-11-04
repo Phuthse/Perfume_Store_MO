@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
 import 'package:perfume_store_mo/pages/profile.dart';
 
@@ -13,11 +15,24 @@ class Profiledetails extends StatefulWidget {
 
 class _ProfiledetailsState extends State<Profiledetails> {
   Map<String, dynamic>? userData;
+  File? _image;
 
   @override
   void initState() {
     super.initState();
     fetchUserData();
+  }
+
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+      uploadImage(File(pickedFile.path)); // Gửi ảnh lên server
+    }
   }
 
   Future<void> fetchUserData() async {
@@ -36,12 +51,13 @@ class _ProfiledetailsState extends State<Profiledetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => const Bottomnav()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Bottomnav()));
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -87,19 +103,26 @@ class _ProfiledetailsState extends State<Profiledetails> {
                                 minRadius: 45,
                                 maxRadius: 50,
                                 child: ClipOval(
-                                  child: Image.network(
-                                    userData![
-                                        'profileUrl'], // Giữ nguyên hình ảnh mặc định
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: _image != null
+                                      ? Image.file(
+                                          _image!,
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.network(
+                                          userData!['profileUrl'],
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                               Container(
                                 child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.camera_alt)),
+                                  onPressed: pickImage, // Gọi hàm chọn ảnh
+                                  icon: const Icon(Icons.camera_alt),
+                                ),
                               ),
                             ],
                           ),
@@ -152,12 +175,138 @@ class _ProfiledetailsState extends State<Profiledetails> {
                   const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           GestureDetector(
             onTap: () {
-              // Thêm logic chỉnh sửa thông tin tại đây
+              showEditBottomSheet(
+                  title.toLowerCase(), value); // Hiển thị hộp thoại chỉnh sửa
             },
             child: Text("$value >", style: const TextStyle(fontSize: 16)),
           ),
         ],
       ),
     );
+  }
+
+  bool isUpdating = false;
+  Future<void> updateUserData(String field, String newValue) async {
+    setState(() {
+      isUpdating = true; // Đánh dấu đang cập nhật
+    });
+
+    try {
+    final response = await http.put(
+      Uri.parse(
+          'http://www.perfumestore.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({field: newValue}),
+    );
+
+    if (response.statusCode == 200) {
+      
+      setState(() {
+        userData![field] = newValue;
+      });
+      await fetchUserData();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('User data updated successfully')),
+      );
+    } else {
+      throw Exception('Failed to update user data');
+    }
+  } catch (e) {
+    print('Error when updating user data: $e');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Failed to update user data: $e')),
+    );
+  } finally {
+    setState(() {
+      isUpdating = false; // Hoàn tất cập nhật
+    });
+  }
+  }
+
+  void showEditBottomSheet(String field, String currentValue) {
+    final controller = TextEditingController(text: currentValue);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled:
+          true, // Giúp điều chỉnh kích thước khi bàn phím mở lên
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context)
+                .viewInsets
+                .bottom, // Điều chỉnh theo bàn phím
+            left: 16,
+            right: 16,
+            top: 16,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Edit $field", style: const TextStyle(fontSize: 20)),
+              const SizedBox(height: 10),
+              TextField(
+                controller: controller,
+                decoration: InputDecoration(hintText: "Enter new $field"),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Cancel"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      final newValue = controller.text;
+                      if (newValue.isNotEmpty && newValue != currentValue) {
+                        updateUserData(field, newValue);
+                      }
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Save"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> uploadImage(File image) async {
+    final request = http.MultipartRequest(
+      'PUT',
+      Uri.parse(
+          'http://www.perfumestore.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
+    );
+
+    request.files
+        .add(await http.MultipartFile.fromPath('profileUrl', image.path));
+    request.headers['Content-Type'] = 'multipart/form-data';
+    final response = await request.send();
+
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Profile image updated successfully')),
+      );
+      fetchUserData(); // Cập nhật lại dữ liệu người dùng
+    } else {
+      final responseBody =
+          await response.stream.bytesToString(); // Kiểm tra chi tiết lỗi
+      print('Failed to upload image. Status code: ${response.statusCode}');
+      print(
+          'Response body: $responseBody'); // In ra để kiểm tra chi tiết phản hồi
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to upload image: $responseBody')),
+      );
+    }
   }
 }
