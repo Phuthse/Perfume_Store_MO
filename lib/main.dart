@@ -35,7 +35,12 @@ class MyApp extends StatelessWidget {
             // Nếu có lỗi khi xác thực, bạn có thể hiển thị thông báo lỗi
             return Center(child: Text('Error: ${snapshot.error}'));
           }
-
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.data == null) {
+              return Bottomnav();
+            } else {
+              return Bottomnav();
+            }
           // Kiểm tra xem người dùng đã đăng nhập hay chưa
           if (snapshot.data == null) {
             // Nếu chưa đăng nhập, điều hướng đến trang đăng nhập
@@ -46,6 +51,7 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
+      //home: Adminlogin(),
     );
   }
 }
