@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
+import 'package:perfume_store_mo/pages/home.dart';
 
 class Checkout extends StatefulWidget {
   const Checkout({super.key});

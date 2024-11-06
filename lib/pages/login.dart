@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
 import 'package:perfume_store_mo/pages/forgotpas.dart';
+import 'package:perfume_store_mo/pages/home.dart';
 import 'package:perfume_store_mo/pages/register.dart';
 import 'package:perfume_store_mo/pages/start.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 import 'package:sign_in_button/sign_in_button.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -19,6 +22,8 @@ class _LogInState extends State<LogIn> {
   String email = "", password = "";
   final _formkey = GlobalKey<FormState>();
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   TextEditingController useremailcontroller = TextEditingController();
   TextEditingController userpasswordcontroller = TextEditingController();
 
@@ -27,7 +32,7 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Bottomnav()));
+          context, MaterialPageRoute(builder: (context) => const Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -41,7 +46,7 @@ class _LogInState extends State<LogIn> {
           "Wrong Email or Password, please try again",
           style: TextStyle(fontSize: 18.0, color: Colors.white),
         )));
-      } 
+      }
     }
   }
 
@@ -164,7 +169,7 @@ class _LogInState extends State<LogIn> {
                       Buttons.google,
                       text: "Sign in with Google",
                       onPressed: () {
-                        signInWithGoogle();
+                        _signIn();
                       },
                     )),
                     const SizedBox(
@@ -202,6 +207,51 @@ class _LogInState extends State<LogIn> {
     );
   }
 
+  Future<void> _signIn() async {
+  try {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    
+    if (googleUser == null) {
+      return;
+    }
+
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    String? idToken = googleAuth.idToken;
+    if (idToken != null) {
+
+      _sendTokenToBackend(idToken);
+    } else {
+      print("idToken is null");
+    }
+  } catch (error) {
+    print("Error signing in: $error");
+  }
+}
+
+  Future<void> _sendTokenToBackend(String idToken) async {
+
+    final response = await http.post(
+      Uri.parse('https://www.perfumestorev2.somee.com/api/Auth/signin-google'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({'idToken': idToken}),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const Bottomnav()),
+      );
+    } else {
+      print('Login with Google failed: ${response.statusCode}');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login failed, please try again!')),
+      );
+    }
+  }
+
   signInWithGoogle() async {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -213,7 +263,6 @@ class _LogInState extends State<LogIn> {
         await FirebaseAuth.instance.signInWithCredential(credential);
     print(userCredential.user?.displayName);
     print(userCredential.user?.email);
-    print(userCredential.user?.phoneNumber);
 
     if (userCredential.user != null) {
       Navigator.of(context)

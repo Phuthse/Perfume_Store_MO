@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int currentTabIndex = 0;
   List<Perfume> perfumeData = <Perfume>[];
 
   @override
@@ -28,6 +29,12 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void onTabTapped(int index) {
+    setState(() {
+      currentTabIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +42,12 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         actionsIconTheme: const IconThemeData(color: Colors.blueGrey),
         actions: [
-          IconButton(onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const Search()));
-          }, icon: const Icon(Icons.search)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Search()));
+              },
+              icon: const Icon(Icons.search)),
         ],
       ),
       body: Container(
@@ -86,8 +96,7 @@ class _HomeState extends State<Home> {
               ),
               const SizedBox(height: 25.0),
               Container(
-                padding: const EdgeInsets.only(
-                    top: 20, bottom: 0, right: 5),
+                padding: const EdgeInsets.only(top: 20, bottom: 0, right: 5),
                 height: 305,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -111,7 +120,8 @@ class _HomeState extends State<Home> {
                         child: Card(
                           color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+                            padding: const EdgeInsets.only(
+                                left: 10, top: 10, right: 10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,7 +230,8 @@ class _HomeState extends State<Home> {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  Text("Release Year: " '${perfumeData[index].releaseYear}'),
+                                  Text("Release Year: "
+                                      '${perfumeData[index].releaseYear}'),
                                   const SizedBox(
                                     height: 5,
                                   ),

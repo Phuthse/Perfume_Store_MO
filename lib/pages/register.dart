@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
+import 'package:perfume_store_mo/pages/home.dart';
 import 'package:perfume_store_mo/pages/login.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 
