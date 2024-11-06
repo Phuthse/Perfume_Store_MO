@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
 import 'package:perfume_store_mo/pages/checkout.dart';
+import 'package:perfume_store_mo/pages/home.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
 import 'package:http/http.dart' as http;
 

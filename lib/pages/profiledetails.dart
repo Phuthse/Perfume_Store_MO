@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:perfume_store_mo/pages/bottomnav.dart';
+import 'package:perfume_store_mo/pages/home.dart';
 import 'package:perfume_store_mo/pages/profile.dart';
 
 class Profiledetails extends StatefulWidget {
@@ -57,7 +58,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Bottomnav()));
+                MaterialPageRoute(builder: (context) => const Home()));
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -69,7 +70,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
           IconButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Bottomnav()));
+                  MaterialPageRoute(builder: (context) => const Home()));
             },
             icon: const Icon(Icons.done_outlined),
           ),
