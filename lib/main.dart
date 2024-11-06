@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.data == null) {
-              return LogIn();
+              return Bottomnav();
             } else {
               return Bottomnav();
             }
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         },
       ),
-    //home: Adminlogin(),
+      //home: Adminlogin(),
     );
   }
 }
