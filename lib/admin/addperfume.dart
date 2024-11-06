@@ -69,7 +69,7 @@ class _AddperfumeState extends State<Addperfume> {
               Navigator.pop(context);
             },
             child: Icon(
-              Icons.arrow_back_ios_new_outlined,
+              Icons.arrow_back,
               color: Color(0xFF373866),
             )),
         centerTitle: true,

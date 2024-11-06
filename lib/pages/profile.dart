@@ -151,7 +151,7 @@ class _ProState extends State<Profile> {
   Future<void> fetchUserData() async {
     try {
       final response = await http.get(Uri.parse(
-          'http://www.perfumestore.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
+          'https://www.perfumestorev2.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
 
       if (response.statusCode == 200) {
         setState(() {

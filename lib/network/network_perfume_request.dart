@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:perfume_store_mo/model/perfume.dart';
 
 class NetworkPerfumeRequest {
-  static const String url = 'http://www.perfumestore.somee.com/api/v1/perfumes';
+  static const String url = 'https://www.perfumestorev2.somee.com/api/v1/perfumes';
 
   static List<Perfume> parsePerfume(String responseBody) {
     var list = json.decode(responseBody) as List<dynamic>;

@@ -23,7 +23,7 @@ class _CartState extends State<Cart> {
 
   Future<void> fetchPerfumesData() async {
     final response = await http.get(Uri.parse(
-        'http://www.perfumestore.somee.com/perfume/22222222-2222-2222-2222-222222222222'));
+        'https://www.perfumestorev2.somee.com/perfume/22222222-2222-2222-2222-222222222222'));
 
     if (response.statusCode == 200) {
       // Giả sử phản hồi trả về là danh sách

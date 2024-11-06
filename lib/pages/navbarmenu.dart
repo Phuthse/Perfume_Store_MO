@@ -24,7 +24,7 @@ class _NavbarmenuState extends State<Navbarmenu> {
 
   Future<void> fetchUserData() async {
     final response = await http.get(Uri.parse(
-        'http://www.perfumestore.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
+        'https://www.perfumestorev2.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
     if (response.statusCode == 200) {
       setState(() {
         userData = json.decode(response.body);
@@ -48,14 +48,14 @@ class _NavbarmenuState extends State<Navbarmenu> {
               child: ClipOval(
                 child: userData != null && userData!['profileUrl'] != null
                     ? FadeInImage.assetNetwork(
-                        placeholder: 'images/user.png', // Hình ảnh mặc định
+                        placeholder: 'images/user.png', 
                         image: userData!['profileUrl'],
                         width: 90,
                         height: 90,
                         fit: BoxFit.cover,
                         imageErrorBuilder: (context, error, stackTrace) {
                           return Image.asset(
-                            'images/user.png', // Hình ảnh mặc định nếu có lỗi
+                            'images/user.png', 
                             width: 90,
                             height: 90,
                             fit: BoxFit.cover,

@@ -31,13 +31,13 @@ class _ProfiledetailsState extends State<Profiledetails> {
       setState(() {
         _image = File(pickedFile.path);
       });
-      uploadImage(File(pickedFile.path)); // Gửi ảnh lên server
+      uploadImage(File(pickedFile.path));
     }
   }
 
   Future<void> fetchUserData() async {
     final response = await http.get(Uri.parse(
-        'http://www.perfumestore.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
+        'https://www.perfumestorev2.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
 
     if (response.statusCode == 200) {
       setState(() {
@@ -120,7 +120,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
                               ),
                               Container(
                                 child: IconButton(
-                                  onPressed: pickImage, // Gọi hàm chọn ảnh
+                                  onPressed: pickImage,
                                   icon: const Icon(Icons.camera_alt),
                                 ),
                               ),
@@ -152,6 +152,13 @@ class _ProfiledetailsState extends State<Profiledetails> {
                           ? userData!['address']
                           : 'Add Address',
                       context),
+                  buildProfileDetail(
+                      "Profile Url",
+                      userData!['profileUrl']?.isNotEmpty ?? false
+                          ? userData!['profileUrl']
+                          : 'Add photo by URL',
+                      context),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
@@ -159,6 +166,13 @@ class _ProfiledetailsState extends State<Profiledetails> {
   }
 
   Widget buildProfileDetail(String title, String value, BuildContext context) {
+    String displayValue = value;
+    if (title == "Profile Url") {
+      displayValue = value.length > 30 ? value.substring(0, 30) + '...' : value;
+    }
+
+    bool isEditable = title != "Name" && title != "Email";
+
     return Container(
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 10, right: 10),
       margin: const EdgeInsets.only(left: 17, right: 17, top: 5),
@@ -174,53 +188,20 @@ class _ProfiledetailsState extends State<Profiledetails> {
               style:
                   const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           GestureDetector(
-            onTap: () {
-              showEditBottomSheet(
-                  title.toLowerCase(), value); // Hiển thị hộp thoại chỉnh sửa
-            },
-            child: Text("$value >", style: const TextStyle(fontSize: 16)),
+            onTap: isEditable
+                ? () {
+                    showEditBottomSheet(title.toLowerCase(), value);
+                  }
+                : null,
+            child: Text(
+              "$displayValue >",
+              style: const TextStyle(fontSize: 16),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),
     );
-  }
-
-  bool isUpdating = false;
-  Future<void> updateUserData(String field, String newValue) async {
-    setState(() {
-      isUpdating = true; // Đánh dấu đang cập nhật
-    });
-
-    try {
-    final response = await http.put(
-      Uri.parse(
-          'http://www.perfumestore.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({field: newValue}),
-    );
-
-    if (response.statusCode == 200) {
-      
-      setState(() {
-        userData![field] = newValue;
-      });
-      await fetchUserData();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('User data updated successfully')),
-      );
-    } else {
-      throw Exception('Failed to update user data');
-    }
-  } catch (e) {
-    print('Error when updating user data: $e');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Failed to update user data: $e')),
-    );
-  } finally {
-    setState(() {
-      isUpdating = false; // Hoàn tất cập nhật
-    });
-  }
   }
 
   void showEditBottomSheet(String field, String currentValue) {
@@ -228,17 +209,14 @@ class _ProfiledetailsState extends State<Profiledetails> {
 
     showModalBottomSheet(
       context: context,
-      isScrollControlled:
-          true, // Giúp điều chỉnh kích thước khi bàn phím mở lên
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context)
-                .viewInsets
-                .bottom, // Điều chỉnh theo bàn phím
+            bottom: MediaQuery.of(context).viewInsets.bottom,
             left: 16,
             right: 16,
             top: 16,
@@ -285,7 +263,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
     final request = http.MultipartRequest(
       'PUT',
       Uri.parse(
-          'http://www.perfumestore.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
+          'https://www.perfumestorev2.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
     );
 
     request.files
@@ -297,16 +275,51 @@ class _ProfiledetailsState extends State<Profiledetails> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Profile image updated successfully')),
       );
-      fetchUserData(); // Cập nhật lại dữ liệu người dùng
+      fetchUserData();
     } else {
-      final responseBody =
-          await response.stream.bytesToString(); // Kiểm tra chi tiết lỗi
+      final responseBody = await response.stream.bytesToString();
       print('Failed to upload image. Status code: ${response.statusCode}');
-      print(
-          'Response body: $responseBody'); // In ra để kiểm tra chi tiết phản hồi
+      print('Response body: $responseBody');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to upload image: $responseBody')),
       );
+    }
+  }
+
+  bool isUpdating = false;
+  Future<void> updateUserData(String field, String newValue) async {
+    setState(() {
+      isUpdating = true;
+    });
+
+    try {
+      final response = await http.put(
+        Uri.parse(
+            'https://www.perfumestorev2.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({field: newValue}),
+      );
+
+      if (response.statusCode == 200) {
+        setState(() {
+          userData![field] = newValue;
+        });
+        await fetchUserData();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('User data updated successfully')),
+        );
+      } else {
+        throw Exception('Failed to update user data');
+      }
+    } catch (e) {
+      print('Error when updating user data: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update user data: $e')),
+      );
+    } finally {
+      setState(() {
+        isUpdating = false;
+      });
     }
   }
 }

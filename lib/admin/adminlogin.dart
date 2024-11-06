@@ -107,6 +107,7 @@ class _AdminloginState extends State<Adminlogin> {
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Center(
                                   child: TextFormField(
+                                    obscureText: true,
                                     controller: userpasswordcontroller,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -115,6 +116,7 @@ class _AdminloginState extends State<Adminlogin> {
                                       return null;
                                     },
                                     decoration: const InputDecoration(
+                                      
                                         border: InputBorder.none,
                                         hintText: "Password",
                                         hintStyle: TextStyle(
