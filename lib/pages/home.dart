@@ -212,7 +212,7 @@ class _HomeState extends State<Home> {
                         child: Container(
                           width: 200,
                           margin: const EdgeInsets.only(
-                              right: 5), // Khoảng cách giữa các item
+                              right: 5), 
                           child: Card(
                             color: Colors.white,
                             child: Padding(

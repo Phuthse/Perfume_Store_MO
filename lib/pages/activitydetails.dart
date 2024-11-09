@@ -4,7 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 
 class Activitydetails extends StatefulWidget {
-  final String perfumeId; // Nhận perfumeId từ màn hình trước
+  final String perfumeId; 
 
   const Activitydetails({super.key, required this.perfumeId});
 
@@ -13,12 +13,12 @@ class Activitydetails extends StatefulWidget {
 }
 
 class _ActivitydetailsState extends State<Activitydetails> {
-  Map<String, dynamic>? perfumeData; // Dữ liệu chi tiết nước hoa
+  Map<String, dynamic>? perfumeData; 
 
   @override
   void initState() {
     super.initState();
-    fetchPerfumeDetails(); // Gọi hàm lấy chi tiết nước hoa khi khởi tạo
+    fetchPerfumeDetails(); 
   }
 
   Future<void> fetchPerfumeDetails() async {
@@ -27,7 +27,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
 
     if (response.statusCode == 200) {
       setState(() {
-        perfumeData = json.decode(response.body); // Lưu dữ liệu vào perfumeData
+        perfumeData = json.decode(response.body); 
       });
     } else {
       throw Exception('Failed to load perfume details');
@@ -61,7 +61,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 80),
+                        const SizedBox(width: 85),
                         const Text(
                           "Reviews & Ratings",
                           style: TextStyle(
@@ -84,39 +84,42 @@ class _ActivitydetailsState extends State<Activitydetails> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  perfumeData!['name'] ?? "No Name",
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                                const SizedBox(height: 5),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "${perfumeData!['volume']} ml",
-                                      style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w300),
-                                    ),
-                                    const SizedBox(width: 100),
-                                    Text(
-                                      "\$${perfumeData!['price']}",
-                                      style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w300),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 15),
-                                Image.network(
-                                  perfumeData!['imageUrl'] ?? "",
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  height:
-                                      MediaQuery.of(context).size.height / 4,
-                                  fit: BoxFit.fill,
-                                ),
-                              ],
+                            child: Container(
+                              margin: EdgeInsets.only(left: 25),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    perfumeData!['name'] ?? "No Name",
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "${perfumeData!['volume']} ml",
+                                        style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                      const SizedBox(width: 100),
+                                      Text(
+                                        "\$${perfumeData!['price']}",
+                                        style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Image.network(
+                                    perfumeData!['imageUrl'] ?? "",
+                                    width: MediaQuery.of(context).size.width / 2,
+                                    height:
+                                        MediaQuery.of(context).size.height / 4,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -167,7 +170,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(left: 10, right: 10),
-                      child: const Text(" 1,230 reviews"),
+                      child: const Text(" 243 reviews"),
                     ),
                     const SizedBox(height: 20),
                     buildUserReview(

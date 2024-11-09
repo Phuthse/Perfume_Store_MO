@@ -58,7 +58,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Home()));
+                MaterialPageRoute(builder: (context) => const Bottomnav()));
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -70,7 +70,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
           IconButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Home()));
+                  MaterialPageRoute(builder: (context) => const Profile()));
             },
             icon: const Icon(Icons.done_outlined),
           ),

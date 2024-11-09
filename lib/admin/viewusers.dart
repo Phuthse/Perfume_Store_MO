@@ -1,4 +1,4 @@
-import 'dart:convert'; // Để giải mã dữ liệu JSON
+import 'dart:convert'; 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,7 +43,7 @@ class _ViewusersState extends State<Viewusers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View Users'),
+        title: const Text('User List'),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator()) 

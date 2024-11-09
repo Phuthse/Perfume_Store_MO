@@ -10,6 +10,7 @@ import 'package:perfume_store_mo/widget/widget_support.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -22,8 +23,6 @@ class _LogInState extends State<LogIn> {
   String email = "", password = "";
   final _formkey = GlobalKey<FormState>();
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-
   TextEditingController useremailcontroller = TextEditingController();
   TextEditingController userpasswordcontroller = TextEditingController();
 
@@ -32,7 +31,7 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Home()));
+          context, MaterialPageRoute(builder: (context) => const Bottomnav()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -151,7 +150,7 @@ class _LogInState extends State<LogIn> {
                                     BorderSide(color: Colors.black, width: 1))),
                         padding: const EdgeInsets.only(
                             left: 140, right: 140, top: 15, bottom: 15),
-                        child: Text("Login", style: AppWidget.whiteText()),
+                        child: Text("Sign In", style: AppWidget.whiteText()),
                       ),
                     ),
                     const SizedBox(
@@ -169,7 +168,7 @@ class _LogInState extends State<LogIn> {
                       Buttons.google,
                       text: "Sign in with Google",
                       onPressed: () {
-                        _signIn();
+                        signInWithGoogle();
                       },
                     )),
                     const SizedBox(
@@ -207,71 +206,127 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  Future<void> _signIn() async {
-  try {
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-    
-    if (googleUser == null) {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+  bool _isSigningIn = false;
+  
+  Future<void> signInWithGoogle() async {
+    setState(() {
+      _isSigningIn = true;
+    });
+
+    try {
+      GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser == null) {
+        setState(() {
+          _isSigningIn = false;
+        });
+        print("User canceled the sign-in process.");
+        return;
+      }
+
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+      User? user = userCredential.user;
+      if (user != null) {
+        String? idToken = await user.getIdToken();
+
+        print("User signed in: ${user.displayName}");
+        print("ID Token: $idToken");
+
+        await _saveToken(idToken!);
+        await verifyTokenOnBackend(idToken);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Bottomnav()),
+        );
+      }
+    } catch (e) {
+      print("Google sign-in error: $e");
+    } finally {
+      setState(() {
+        _isSigningIn = false;
+      });
+    }
+  }
+
+  Future<void> _saveToken(String idToken) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('idToken', idToken);
+  }
+
+  Future<String?> _getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('idToken');
+  }
+
+  Future<void> verifyTokenOnBackend(String? idToken) async {
+    String? idToken = await _getToken();
+
+    if (idToken == null) {
+      print("No ID token found to send to backend.");
       return;
     }
 
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    final url = 'https://www.perfumestorev2.somee.com/api/Auth/verify-token';
 
-    String? idToken = googleAuth.idToken;
-    if (idToken != null) {
-
-      _sendTokenToBackend(idToken);
-    } else {
-      print("idToken is null");
-    }
-  } catch (error) {
-    print("Error signing in: $error");
-  }
-}
-
-  Future<void> _sendTokenToBackend(String idToken) async {
-
-    final response = await http.post(
-      Uri.parse('https://www.perfumestorev2.somee.com/api/Auth/signin-google'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: json.encode({'idToken': idToken}),
-    );
-
-    if (response.statusCode == 200) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const Bottomnav()),
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $idToken',
+        },
       );
-    } else {
-      print('Login with Google failed: ${response.statusCode}');
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login failed, please try again!')),
-      );
+      if (response.statusCode == 200) {
+        print('Token verification successful: ${response.body}');
+      } else {
+        print('Token verification failed: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during token verification: $e');
     }
   }
 
-  signInWithGoogle() async {
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    print(userCredential.user?.displayName);
-    print(userCredential.user?.email);
+  // signInWithGoogle() async {
+  //   GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    if (userCredential.user != null) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Bottomnav()));
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-        "Sign in as ${userCredential.user!.displayName!}",
-        style: const TextStyle(fontSize: 18.0, color: Colors.white),
-      )));
-    }
-  }
+  //   if (googleUser == null) {
+  //     print("User canceled the sign-in process.");
+  //     return;
+  //   }
+
+  //   GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  //   //String? idToken = googleAuth?.idToken;
+
+  //   AuthCredential credential = GoogleAuthProvider.credential(
+  //     accessToken: googleAuth?.accessToken,
+  //     idToken: googleAuth?.idToken,
+  //   );
+  //   UserCredential userCredential =
+  //       await FirebaseAuth.instance.signInWithCredential(credential);
+  //   print(userCredential.user?.displayName);
+  //   print(userCredential.user?.email);
+
+  //   if (userCredential.user != null) {
+  //     //_saveToken(idToken!);
+  //     Navigator.of(context)
+  //         .push(MaterialPageRoute(builder: (context) => const Bottomnav()));
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //         content: Text(
+  //       "Sign in as ${userCredential.user!.displayName!}",
+  //       style: const TextStyle(fontSize: 18.0, color: Colors.white),
+  //     )));
+  //   }
+  // }
 }

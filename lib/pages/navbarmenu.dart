@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:perfume_store_mo/pages/bottomnav.dart';
 import 'package:perfume_store_mo/pages/login.dart';
+import 'package:perfume_store_mo/pages/notification.dart';
 
 class Navbarmenu extends StatefulWidget {
   const Navbarmenu({super.key});
@@ -63,7 +64,7 @@ class _NavbarmenuState extends State<Navbarmenu> {
                         },
                       )
                     : Image.asset(
-                        'images/user.png', // Hình ảnh mặc định nếu userData hoặc profileUrl là null
+                        'images/user.png', 
                         width: 90,
                         height: 90,
                         fit: BoxFit.cover,
@@ -87,6 +88,18 @@ class _NavbarmenuState extends State<Navbarmenu> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const LogIn()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.notification_add),
+            title: const Text("Notification Test"),
+            onTap: () async {
+              await GoogleSignIn().signOut();
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationScreen()),
               );
             },
           ),

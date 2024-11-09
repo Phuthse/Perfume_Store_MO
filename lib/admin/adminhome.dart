@@ -61,7 +61,7 @@ class _AdminhomeState extends State<Adminhome> {
                           width: 10.0,
                         ),
                         const Text(
-                          "Add Perfume Items",
+                          "Create Perfume Item",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 20.0,

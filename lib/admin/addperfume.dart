@@ -49,13 +49,13 @@ class _AddperfumeState extends State<Addperfume> {
         "Detail": detailcontroller.text
       };
       await DatabaseMethods().addPerfumeItem(addItem, value!).then((value) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.orangeAccent,
             content: Text(
               "Perfume Item has been added Successfully",
               style: TextStyle(fontSize: 18.0),
             )));
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Adminhome()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const Adminhome()));
       });
     }
   }
@@ -68,12 +68,12 @@ class _AddperfumeState extends State<Addperfume> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Color(0xFF373866),
             )),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Add Perfume Item",
 
         ),
@@ -81,15 +81,15 @@ class _AddperfumeState extends State<Addperfume> {
       body: SingleChildScrollView(
         child: Container(
           margin:
-              EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 50.0),
+              const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 50.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Upload the Item Picture",
 
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               selectedImage == null
@@ -109,7 +109,7 @@ class _AddperfumeState extends State<Addperfume> {
                                   Border.all(color: Colors.black, width: 1.5),
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.camera_alt_outlined,
                               color: Colors.black,
                             ),
@@ -138,92 +138,92 @@ class _AddperfumeState extends State<Addperfume> {
                         ),
                       ),
                     ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
-              Text(
+              const Text(
                 "Item Name",
 
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextField(
                   controller: namecontroller,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: "Enter Item Name",
 ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
-              Text(
+              const Text(
                 "Item Price",
 
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextField(
                   controller: pricecontroller,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: "Enter Item Price",
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
-              Text(
+              const Text(
                 "Item Detail",
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextField(
                   maxLines: 6,
                   controller: detailcontroller,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: "Enter Item Detail",
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              Text(
+              const Text(
                 "Select Category",
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -233,23 +233,23 @@ class _AddperfumeState extends State<Addperfume> {
                           child: Text(
                             item,
                             style:
-                                TextStyle(fontSize: 18.0, color: Colors.black),
+                                const TextStyle(fontSize: 18.0, color: Colors.black),
                           )))
                       .toList(),
                   onChanged: ((value) => setState(() {
                         this.value = value;
                       })),
                   dropdownColor: Colors.white,
-                  hint: Text("Select Category"),
+                  hint: const Text("Select Category"),
                   iconSize: 36,
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_drop_down,
                     color: Colors.black,
                   ),
                   value: value,
                 )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               GestureDetector(
@@ -261,12 +261,12 @@ class _AddperfumeState extends State<Addperfume> {
                     elevation: 5.0,
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 5.0),
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
                       width: 150,
                       decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(10)),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Add",
                           style: TextStyle(
