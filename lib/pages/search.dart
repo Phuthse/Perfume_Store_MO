@@ -12,7 +12,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  int maxItems = 4;
+  int maxItems = 5;
     final searchcontroller = TextEditingController();
   
     List<Perfume> perfumeData = <Perfume>[];

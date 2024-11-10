@@ -25,7 +25,7 @@ class _NavbarmenuState extends State<Navbarmenu> {
 
   Future<void> fetchUserData() async {
     final response = await http.get(Uri.parse(
-        'https://www.perfumestorev2.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
+        'https://perfumestorev2.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
     if (response.statusCode == 200) {
       setState(() {
         userData = json.decode(response.body);
@@ -95,12 +95,7 @@ class _NavbarmenuState extends State<Navbarmenu> {
             leading: Icon(Icons.notification_add),
             title: const Text("Notification Test"),
             onTap: () async {
-              await GoogleSignIn().signOut();
-              FirebaseAuth.instance.signOut();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const NotificationScreen()),
-              );
+            
             },
           ),
         ],

@@ -12,22 +12,22 @@ class Activity extends StatefulWidget {
 }
 
 class _ActivityState extends State<Activity> {
-  List<dynamic> perfumes = []; // Danh sách để lưu trữ dữ liệu nước hoa
+  List<dynamic> perfumes = []; 
 
   @override
   void initState() {
     super.initState();
-    fetchPerfumes(); // Gọi hàm lấy dữ liệu khi khởi tạo
+    fetchPerfumes(); 
   }
 
   Future<void> fetchPerfumes() async {
     final response = await http.get(Uri.parse(
-        'https://www.perfumestorev2.somee.com/api/v1/perfumes?page=1&pageSize=10'));
+        'https://perfumestorev2.somee.com/api/v1/perfumes?page=1&pageSize=10'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
-        perfumes = data; // Lưu dữ liệu vào danh sách bao gồm perfumeId
+        perfumes = data;
       });
     } else {
       throw Exception('Failed to load perfumes');
@@ -76,10 +76,10 @@ class _ActivityState extends State<Activity> {
                     child: GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // 2 items per row
-                        childAspectRatio: 0.7, // Adjust as needed
+                        crossAxisCount: 2, 
+                        childAspectRatio: 0.7, 
                         crossAxisSpacing: 10,
-                        mainAxisSpacing: 10, // Tỷ lệ hiển thị từng item
+                        mainAxisSpacing: 10, 
                       ),
                       itemCount: perfumes.length,
                       itemBuilder: (context, index) {

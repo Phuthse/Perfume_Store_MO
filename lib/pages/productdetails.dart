@@ -1,106 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/model/perfume.dart';
 import 'package:perfume_store_mo/pages/cart.dart';
 import 'package:perfume_store_mo/widget/widget_support.dart';
-
-// class Productdetails extends StatefulWidget {
-//   final dynamic product;
-//   Productdetails({required this.product});
-
-//   @override
-//   State<Productdetails> createState() => _ProductdetailsState();
-// }
-
-// class _ProductdetailsState extends State<Productdetails> {
-
-//   int q = 1; //minimum quantity
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         body: Container(
-//       margin: const EdgeInsets.only(top: 65.0, left: 10.0, right: 10.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           GestureDetector(
-//             onTap: () {
-//               Navigator.pop(context);
-//             },
-//             child: const Icon(Icons.arrow_back, color: Colors.black),
-//           ),
-//           Padding(
-//             padding: EdgeInsets.all(16.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text("Name: ${product['name']}",
-//                     style: TextStyle(fontSize: 20)),
-//                 Text("Brand: ${product['brand']}",
-//                     style: TextStyle(fontSize: 18)),
-//                 Text("Price: ${product['price']}",
-//                     style: TextStyle(fontSize: 18)),
-//                 Text("Release Year: ${product['releaseYear']}",
-//                     style: TextStyle(fontSize: 18)),
-//               ],
-//             ),
-//           ),
-//           Container(
-//             margin: const EdgeInsets.only(right: 100.0),
-//             child: Row(
-//               children: [
-//                 GestureDetector(
-//                     onTap: () {
-//                       if (q > 1) {
-//                         q--;
-//                       }
-//                       setState(() {});
-//                     },
-//                     child: Container(
-//                         child: const Icon(Icons.remove, color: Colors.black))),
-//                 SizedBox(
-//                   width: 10,
-//                 ),
-//                 Container(
-//                   padding: EdgeInsets.only(left: 20, right: 20),
-//                   decoration: BoxDecoration(
-//                       border: Border.all(width: 1),
-//                       borderRadius: BorderRadius.circular(25)),
-//                   child: Text(q.toString(), style: AppWidget.boldText()),
-//                 ),
-//                 SizedBox(
-//                   width: 10,
-//                 ),
-//                 GestureDetector(
-//                     onTap: () {
-//                       q++;
-//                       setState(() {});
-//                     },
-//                     child: Container(
-//                         child: const Icon(Icons.add, color: Colors.black))),
-//               ],
-//             ),
-//           ),
-//           const SizedBox(height: 20.0),
-//           GestureDetector(
-//             onTap: () {
-//               Navigator.push(context,
-//                   MaterialPageRoute(builder: (context) => const Cart()));
-//             },
-//             child: Container(
-//               margin: const EdgeInsets.only(left: 8),
-//               padding: const EdgeInsets.only(
-//                   left: 150, top: 20, bottom: 20, right: 150),
-//               decoration: BoxDecoration(
-//                   color: Colors.black,
-//                   borderRadius: BorderRadius.circular(15.0)),
-//               child: Text("Add To Cart", style: AppWidget.whiteText()),
-//             ),
-//           )
-//         ],
-//       ),
-//     ));
-//   }
-// }
+import 'package:http/http.dart' as http;
 
 class Productdetails extends StatefulWidget {
   final Perfume product;
@@ -112,12 +16,52 @@ class Productdetails extends StatefulWidget {
 }
 
 class _ProductdetailsState extends State<Productdetails> {
-  int q = 1;
-  // Khai báo các biến trạng thái nếu cần
+  int quantity = 1;
+  
   bool isFavorite = false;
+
+   Future<void> addToCart(String userId, String perfumeId, int quantity) async {
+  final String apiUrl = 'https://perfumestorev2.somee.com/api/v1/add-to-cart?userId=8a9a6e9c-7a12-4033-8e67-83010438b701&quantity=1';  // Thay bằng URL API của bạn
+  
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'userid': userId,
+        'perfumeid': perfumeId,  // Dùng đúng ID của sản phẩm
+        'quantity': quantity,
+      }),
+    );
+
+    // Kiểm tra trạng thái phản hồi và nội dung
+    print("Response status: ${response.statusCode}");
+    print("Response body: ${response.body}");
+
+    if (response.statusCode == 200) {
+      // Nếu yêu cầu thành công, thông báo cho người dùng
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Added to cart successfully!')),
+      );
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const Cart())); // Chuyển sang trang giỏ hàng
+    } else {
+      // Nếu có lỗi, thông báo lỗi từ API
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add to cart. Status Code: ${response.statusCode}, Body: ${response.body}')),
+      );
+    }
+  } catch (e) {
+    // Xử lý lỗi nếu có (lỗi mạng, cấu hình sai, v.v.)
+    print("Error occurred: $e");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('An error occurred. Please try again later.')),
+    );
+  }
+}
   @override
   Widget build(BuildContext context) {
-    //quantity
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -179,8 +123,8 @@ class _ProductdetailsState extends State<Productdetails> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          if (q > 1) {
-                            q--;
+                          if (quantity > 1) {
+                            quantity--;
                           }
                           setState(() {});
                         },
@@ -195,14 +139,14 @@ class _ProductdetailsState extends State<Productdetails> {
                       decoration: BoxDecoration(
                           border: Border.all(width: 1),
                           borderRadius: BorderRadius.circular(25)),
-                      child: Text(q.toString(), style: AppWidget.boldText()),
+                      child: Text(quantity.toString(), style: AppWidget.boldText()),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     GestureDetector(
                         onTap: () {
-                          q++;
+                          quantity++;
                           setState(() {});
                         },
                         child: Container(
@@ -215,9 +159,10 @@ class _ProductdetailsState extends State<Productdetails> {
                 height: 40,
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Cart()));
+                 onTap: () {
+                  String userId = '8a9a6e9c-7a12-4033-8e67-83010438b701'; 
+                  String? perfumeId = widget.product.perfumeId;
+                  addToCart(userId, perfumeId!, quantity); 
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 23),

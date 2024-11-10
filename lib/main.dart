@@ -2,9 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:perfume_store_mo/admin/adminlogin.dart';
+import 'package:perfume_store_mo/pages/bottomnav.dart';
 import 'package:perfume_store_mo/pages/firebaseapi.dart';
-import 'package:perfume_store_mo/pages/googlesignin.dart';
-
 import 'package:perfume_store_mo/pages/login.dart';
 import 'package:perfume_store_mo/pages/notification.dart';
 
@@ -30,33 +29,33 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       navigatorKey: navigatorKey,
-      home: LogIn(),
+      //home: LogIn(),
       routes: {
         NotificationScreen.route: (context) => const NotificationScreen()
       },
-      // home: StreamBuilder<User?>(
-      //   stream: FirebaseAuth.instance.authStateChanges(), 
-      //   builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(), 
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             
-      //       return const Center(child: CircularProgressIndicator());
-      //     }
+            return const Center(child: CircularProgressIndicator());
+          }
 
-      //     if (snapshot.hasError) {
+          if (snapshot.hasError) {
             
-      //       return Center(child: Text('Error: ${snapshot.error}'));
-      //     }
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
 
          
-      //     if (snapshot.data == null) {
+          if (snapshot.data == null) {
            
-      //       return const LogIn(); 
-      //     } else {
+            return const LogIn(); 
+          } else {
             
-      //       return const Bottomnav(); 
-      //     }
-      //   },
-      // ),
+            return const Bottomnav(); 
+          }
+        },
+      ),
     );
   }
 }

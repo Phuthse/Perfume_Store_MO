@@ -38,7 +38,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
 
   Future<void> fetchUserData() async {
     final response = await http.get(Uri.parse(
-        'https://www.perfumestorev2.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
+        'https://perfumestorev2.somee.com/api/v1/user/8a9a6e9c-7a12-4033-8e67-83010438b701'));
 
     if (response.statusCode == 200) {
       setState(() {
@@ -264,7 +264,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
     final request = http.MultipartRequest(
       'PUT',
       Uri.parse(
-          'https://www.perfumestorev2.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
+          'https://perfumestorev2.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
     );
 
     request.files
@@ -296,7 +296,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
     try {
       final response = await http.put(
         Uri.parse(
-            'https://www.perfumestorev2.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
+            'https://perfumestorev2.somee.com/api/v1/users/8a9a6e9c-7a12-4033-8e67-83010438b701'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({field: newValue}),
       );

@@ -23,7 +23,7 @@ class _ActivitydetailsState extends State<Activitydetails> {
 
   Future<void> fetchPerfumeDetails() async {
     final response = await http.get(Uri.parse(
-        'https://www.perfumestorev2.somee.com/perfume/${widget.perfumeId}'));
+        'https://perfumestorev2.somee.com/perfume/${widget.perfumeId}'));
 
     if (response.statusCode == 200) {
       setState(() {

@@ -278,7 +278,7 @@ class _LogInState extends State<LogIn> {
       return;
     }
 
-    final url = 'https://www.perfumestorev2.somee.com/api/Auth/verify-token';
+    final url = 'https://perfumestorev2.somee.com/api/Auth/verify-token';
 
     try {
       final response = await http.post(

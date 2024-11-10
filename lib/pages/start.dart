@@ -16,10 +16,10 @@ class _StartState extends State<Start> {
       body: Stack(
         children: [
           Container(
-            // Add background image
+            
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/start.png'), // Your image path
+                image: AssetImage('images/start.png'), 
                 fit: BoxFit.contain,
               ),
             ),
@@ -28,7 +28,7 @@ class _StartState extends State<Start> {
             child: Container(
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height *
-                      0.75), // Responsive margin
+                      0.75), 
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(15),
@@ -38,12 +38,12 @@ class _StartState extends State<Start> {
                         const Color.fromARGB(255, 62, 62, 62).withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: const Offset(0, 5), // changes position of shadow
+                    offset: const Offset(0, 5), 
                   ),
                 ],
               ),
               padding: const EdgeInsets.symmetric(
-                  vertical: 5, horizontal: 100), // Symmetrical padding
+                  vertical: 5, horizontal: 100), 
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
